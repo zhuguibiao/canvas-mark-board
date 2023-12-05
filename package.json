@@ -1,0 +1,27 @@
+{
+	"type": "module",
+	"scripts": {
+		"dev": "pnpm run dev:react",
+		"dev:react": "pnpm run -C play/react-demo dev",
+		"dev:docs": "pnpm run -C docs/ dev",
+		"build": "pnpm run -C  package/canvas-mark-board build",
+		"build:dts": "pnpm run -C package/canvas-mark-board build:dts",
+		"build:docs": "pnpm run -C docs/ build",
+		"build:vue": "pnpm run -C play/vue-demo build",
+		"build:react": "pnpm run -C play/react-demo build",
+		"build:js": "pnpm run -C play/js-demo build",
+		"deploy": "pnpm run -C docs/ deploy"
+	},
+	"devDependencies": {
+		"@rollup/plugin-sucrase": "^5.0.2",
+		"@rollup/plugin-commonjs": "^25.0.7",
+		"@rollup/plugin-html": "^1.0.3",
+		"@rollup/plugin-multi-entry": "^6.0.1",
+		"@rollup/plugin-node-resolve": "^15.2.3",
+		"@rollup/plugin-terser": "^0.4.4",
+		"@rollup/plugin-typescript": "^11.1.5",
+		"rollup": "^4.6.0",
+		"tslib": "^2.6.2",
+		"typescript": "^5.2.2"
+	}
+}

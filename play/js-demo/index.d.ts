@@ -1,0 +1,3 @@
+// images
+declare module '*.jpg' {
+}

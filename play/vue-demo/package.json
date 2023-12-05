@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "^3.3.4",
+    "canvas-mark-board": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@vue/compiler-sfc": "^3.3.9",
+    "@vitejs/plugin-vue": "^4.2.3"
+  }
+}

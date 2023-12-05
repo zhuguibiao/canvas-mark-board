@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "ES2015",
+    "lib": ["ESNext", "DOM"],
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "removeComments": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": false,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules", "**/node_modules/**", "**/dist/**"]
+}

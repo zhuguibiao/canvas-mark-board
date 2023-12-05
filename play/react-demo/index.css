@@ -1,0 +1,14 @@
+.remark {
+  position: relative;
+}
+
+.remark:hover div {
+  display: block;
+}
+
+.remark div {
+  background: #fff;
+  position: absolute;
+  display: none;
+  z-index: 999;
+}

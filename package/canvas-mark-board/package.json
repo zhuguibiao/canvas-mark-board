@@ -1,0 +1,43 @@
+{
+  "name": "canvas-mark-board",
+  "version": "0.0.1-beta.1",
+  "type": "module",
+  "main": "./dist/index.esm.js",
+  "unpkg": "./dist/index.umd.js",
+  "author": "zhuguibiao <zhuguibiao1994@gmail.com>",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./dist/index.esm.js"
+      },
+      "require": {
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "NODE_ENV=production rollup -c"
+  },
+  "keywords": [
+    "canvas",
+    "canvas-mark",
+    "mark",
+    "board",
+    "react",
+    "vue",
+    "vue-mark",
+    "mark-board",
+    "mark-tool",
+    "img-mark",
+    "drawing",
+    "rect",
+    "polygon",
+    "line",
+    "typescript"
+  ]
+}
