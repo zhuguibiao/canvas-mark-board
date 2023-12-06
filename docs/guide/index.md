@@ -25,16 +25,44 @@ $ yarn add canvas-mark-board
 
 
 ## 使用
-```typescript
-import CanvasMarkBoard from 'canvas-mark-board'
-// import bgImage from './bgImage.jpg'
+
+::: code-group
+
+```js  [js]
+/** link js*/
+// <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.1/dist/index.umd.js"></srcipt>  
+
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
 })
-// mark.value.setBackground(bgImage)
+mark.setDrawType('rect')
+mark.on('oncomplete',(e)=>{e.ok({})})
+
+```
+```tsx  [vue]
+import CanvasMarkBoard from 'canvas-mark-board'
+import { ref } from "vue";
+const mark = ref(null);
+
+mark.value = new CanvasMarkBoard({
+  view: "#mark-box", // dom 选择器
+})
+mark.value.setDrawType('rect')
+mark.value.on('oncomplete',(e)=>{e.ok({})})
+
+```
+
+```tsx  [react]
+import CanvasMarkBoard from 'canvas-mark-board'
+const mark = new CanvasMarkBoard({
+  view: "#mark-box", // dom 选择器
+})
 mark.setDrawType('rect')
 mark.on('oncomplete',(e)=>{e.ok({})})
 ```
+:::
+
+
 
 ## 配置项
 - `config` 配置项

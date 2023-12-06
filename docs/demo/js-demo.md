@@ -11,10 +11,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mark-board</title>
-  <script  src="/canvas-mark-board.js"></script>
+  <script src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.1/dist/index.umd.js"></script>
 </head>
 <style>
-  * {
+  * { 
     box-sizing: border-box;
   }
   .remark {

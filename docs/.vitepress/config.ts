@@ -56,6 +56,9 @@ export default defineConfig({
         },
       ],
     },
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/zhuguibiao/canvas-mark-board' }
+    ],
   },
 });
 
@@ -80,5 +83,6 @@ function nav(): DefaultTheme.NavItem[] {
         },
       ],
     },
+    
   ];
 }
