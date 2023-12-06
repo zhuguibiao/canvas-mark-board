@@ -32,7 +32,8 @@ const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
 })
 // mark.value.setBackground(bgImage)
-mark.value.setDrawType('rect')
+mark.setDrawType('rect')
+mark.on('oncomplete',(e)=>{e.ok({})})
 ```
 
 ## 配置项

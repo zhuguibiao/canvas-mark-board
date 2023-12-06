@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [vue()],
   base: './',
   build: {
-    outDir: 'vue-demo'
+    outDir: "../../docs/.vitepress/dist/vue-demo",
   },
   server: {
     host: '0.0.0.0'

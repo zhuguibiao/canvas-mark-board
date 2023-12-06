@@ -1,9 +1,7 @@
 ---
 layout: home
-
 title: canvas-mark-board
 titleTemplate: canvas-mark-board
-
 hero:
   name: canvas-mark-board
   text: 基于canvas封装的图像标注工具
@@ -16,7 +14,7 @@ hero:
       link: /guide/
     - theme: alt
       text: Demo
-      link: https://stackblitz.com/github/piniajs/example-vue-3-vite
+      link: https://zhuguibiao.github.io/canvas-mark-board/js-demo/
 features:
   - title: 💡 简单
     details: 一款简单且独立的图像手动标注库，小却实用，你可以他用来扩展成视频标注、音频标注

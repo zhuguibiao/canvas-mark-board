@@ -107,7 +107,6 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
   clearCanvas(ctx: CanvasRenderingContext2D) {
     ctx.save();
     ctx.globalCompositeOperation = "copy";
-    // ctx.strokeStyle = 'transparent';
     ctx.beginPath();
     ctx.lineTo(0, 0);
     ctx.stroke();
@@ -185,7 +184,17 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     this.clearCanvas(this.ctx);
     let path = "";
     this.ctx.strokeStyle = this.config.color!;
-    this.markObjectList.map((item) => {
+    this.ctx.fillStyle = this.config.color!;
+    this.ctx.font = `bold ${~~(16 / this.t.a)}px serif`;
+    this.markObjectList.map((item, index) => {
+      if (item.status !== "draw") {
+        /**render 序号 */
+        this.ctx.fillText(
+          index + "",
+          item.indexPoint.x,
+          item.indexPoint.y - 3 / this.t.a
+        );
+      }
       path += item.pathData;
     });
     this.ctx.lineWidth = 2 / this.t.a;

@@ -4,7 +4,7 @@ export default defineConfig({
   resolve: {},
   base: './',
   build: {
-    outDir: "js-demo",
+    outDir: "../../docs/.vitepress/dist/js-demo",
     minify: "terser",
     terserOptions: {
       compress: {
