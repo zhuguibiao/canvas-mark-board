@@ -1,7 +1,7 @@
-# canvas-mark-board
+# canvas-mark-board&middot; [![npm version](https://img.shields.io/npm/v/canvas-mark-board)](https://www.npmjs.com/package/canvas-mark-board)
 
 ## 简介
-`canvas-mark-board` 基于原生canvas封装的图像标注工具，用于在 vue/react/原生js 应用中都可以实现标注功能。它提供了一系列事件和方法，用于管理标注对象、绘制标注形状、导入标注数据等操作。
+`canvas-mark-board` 基于原生canvas封装的图像标注工具，在 vue / react / 原生js 应用中都可以实现标注功能。提供了一系列事件和方法，用于管理标注对象、绘制标注形状、导入标注数据等操作。
 
 [原生js在线演示](https://zhuguibiao.github.io/canvas-mark-board/js-demo/)
 
@@ -22,17 +22,39 @@ yarn add canvas-mark-board
 ```
 
 ## 使用
-```typescript
+
+### 工具模块使用
+```tsx
 import CanvasMarkBoard from 'canvas-mark-board'
-// import bgImage from './bgImage.jpg'
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
 })
-// mark.value.setBackground(bgImage)
 mark.setDrawType('rect')
 mark.on('oncomplete',(e)=>{e.ok({})})
 ```
 
+### CDN 使用
+```html
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.1/dist/index.umd.js"></srcipt>  
+```
+```js 
+const mark = new CanvasMarkBoard({
+  view: "#mark-box", // dom 选择器
+})
+mark.setDrawType('rect')
+mark.on('oncomplete',(e)=>{e.ok({})})
+```
+
+### ESM 使用
+```js 
+import { createApp, ref } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.1/dist/index.esm.js'
+
+const mark = new CanvasMarkBoard({
+  view: "#mark-box", // dom 选择器
+})
+mark.setDrawType('rect')
+mark.on('oncomplete',(e)=>{e.ok({})})
+```
 
 ## 配置项
 - `config` 配置项
