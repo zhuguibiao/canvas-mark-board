@@ -47,7 +47,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### ESM 使用
 ```js 
-import { createApp, ref } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.1/dist/index.esm.js'
+import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.1/dist/index.esm.js'
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
