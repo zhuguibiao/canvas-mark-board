@@ -1,13 +1,14 @@
-import MarkBoard, { ClickMarkObject, MarkBoardUtils } from "canvas-mark-board";
+import MarkBoard from "canvas-mark-board";
+// import MarkBoard from "../../package/canvas-mark-board";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import jsonData from "../../assets/data.json";
 import img from "../../assets/image.jpg";
-
+const { ClickMarkObject, MarkBoardUtils } = MarkBoard;
 class MarkSidesPolygonObject extends ClickMarkObject {
   constructor(box) {
     super(box);
-    this.type = "point";
+    this.type = "sides_polygon" as any;
   }
   get pathData() {
     let path = ``;
@@ -51,7 +52,7 @@ class MarkSidesPolygonObject extends ClickMarkObject {
     return path;
   }
 }
-class MarkPointObject extends ClickMarkObject {
+class MarkPolylineArrowObject extends ClickMarkObject {
   constructor(box) {
     super(box);
     this.type = "polyline_arrow" as any;
@@ -85,6 +86,8 @@ class MarkPointObject extends ClickMarkObject {
     return path;
   }
 }
+MarkBoard.register("sides_polygon", MarkSidesPolygonObject);
+MarkBoard.register("polyline_arrow", MarkPolylineArrowObject);
 
 const shapeTypeList = [
   {
@@ -153,8 +156,7 @@ function Index() {
       view: "#mark-box", // ID名或者DOM对象
       showIndex: false,
     });
-    mark.current.register("sides_polygon", MarkSidesPolygonObject);
-    mark.current.register("polyline_arrow", MarkPointObject);
+
     mark.current.on("ondraw", (e) => {
       mark.current!.currentDrawingType = e.type;
     });

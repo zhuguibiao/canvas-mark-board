@@ -1,14 +1,12 @@
-import CanvasMarkBoard, {
-  ClickMarkObject,
-  MarkBoardUtils,
-} from "canvas-mark-board";
+import CanvasMarkBoard from "../../package/canvas-mark-board/index";
 import Img from "../../assets/image.jpg";
 import json from "../../assets/data.json";
 
+const { ClickMarkObject, MarkBoardUtils } = CanvasMarkBoard;
 class MarkSidesPolygonObject extends ClickMarkObject {
   constructor(box) {
     super(box);
-    this.type = "point";
+    this.type = "sides_polygon" as any;
   }
   get pathData() {
     let path = ``;
@@ -52,7 +50,7 @@ class MarkSidesPolygonObject extends ClickMarkObject {
     return path;
   }
 }
-class MarkPointObject extends ClickMarkObject {
+class MarkPolylineArrowObject extends ClickMarkObject {
   constructor(box) {
     super(box);
     this.type = "polyline_arrow" as any;
@@ -86,7 +84,8 @@ class MarkPointObject extends ClickMarkObject {
     return path;
   }
 }
-
+CanvasMarkBoard.register("sides_polygon", MarkSidesPolygonObject);
+CanvasMarkBoard.register("polyline_arrow", MarkPolylineArrowObject);
 window.onload = onload;
 
 function onload() {
@@ -150,8 +149,8 @@ function onload() {
     mark = new CanvasMarkBoard({
       view: "#mark-box", // ID名或者DOM对象
     });
-    mark.register("sides_polygon", MarkSidesPolygonObject);
-    mark.register("polyline_arrow", MarkPointObject);
+
+
     mark?.setBackground(Img).then(() => {
       mark.setDrawType(mark.currentDrawingType || "rect");
     });
@@ -205,3 +204,4 @@ function onload() {
     };
   }
 }
+console.log('load')

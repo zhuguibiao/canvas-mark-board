@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { onMounted, ref, computed } from "vue";
-import CanvasMarkBoard, {
-  ClickMarkObject,
-  MarkBoardUtils,
-} from "canvas-mark-board";
+import CanvasMarkBoard from "canvas-mark-board";
 import jsonData from "../../assets/data.json";
 import img from "../../assets/image.jpg";
+
+const { ClickMarkObject, MarkBoardUtils } = CanvasMarkBoard;
 
 class MarkSidesPolygonObject extends ClickMarkObject {
   constructor(box) {
     super(box);
-    this.type = "point";
+    this.type = "sides_polygon" as any;
   }
   get pathData() {
     let path = ``;
@@ -54,7 +53,7 @@ class MarkSidesPolygonObject extends ClickMarkObject {
     return path;
   }
 }
-class MarkPointObject extends ClickMarkObject {
+class MarkPolylineArrowObject extends ClickMarkObject {
   constructor(box) {
     super(box);
     this.type = "polyline_arrow" as any;
@@ -88,6 +87,8 @@ class MarkPointObject extends ClickMarkObject {
     return path;
   }
 }
+CanvasMarkBoard.register("sides_polygon", MarkSidesPolygonObject);
+CanvasMarkBoard.register("polyline_arrow", MarkPolylineArrowObject);
 const shapeTypeList = [
   {
     viewBox: "0 0 1024 1024",
@@ -170,8 +171,7 @@ function createMark() {
   mark.value = new CanvasMarkBoard({
     view: "#mark-box",
   });
-  mark.value.register("sides_polygon", MarkSidesPolygonObject);
-  mark.value.register("polyline_arrow", MarkPointObject);
+
   mark.value.setBackground(img).then(() => {
     mark.value?.setDrawType("rect");
   });
