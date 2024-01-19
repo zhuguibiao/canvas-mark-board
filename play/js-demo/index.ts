@@ -1,6 +1,91 @@
-import CanvasMarkBoard from "canvas-mark-board";
+import CanvasMarkBoard, {
+  ClickMarkObject,
+  MarkBoardUtils,
+} from "canvas-mark-board";
 import Img from "../../assets/image.jpg";
 import json from "../../assets/data.json";
+
+class MarkSidesPolygonObject extends ClickMarkObject {
+  constructor(box) {
+    super(box);
+    this.type = "point";
+  }
+  get pathData() {
+    let path = ``;
+    this.pointList.forEach((point, index) => {
+      if (index === 0) {
+        path += `M${point.x},${point.y}`;
+      } else {
+        path += `L${point.x},${point.y}`;
+      }
+    });
+    if (this.pointList.length >= 2) {
+      const [side1, side2] = MarkBoardUtils.getSides(
+        this.pointList[0],
+        this.pointList[1]
+      );
+      const [arrow1, arrow2] = MarkBoardUtils.getArrow(
+        side2,
+        side1,
+        20 / this.box.t.a
+      );
+      path += `Z`;
+      path += `M${side2.x},${side2.y}`;
+      path += `L${side1.x},${side1.y}`;
+      // 绘制三角形
+      path += `Z`;
+      path += `M${arrow1.x},${arrow1.y}`;
+      path += `L${side1.x},${side1.y}`;
+      path += `M${side1.x},${side1.y}`;
+      path += `L${arrow2.x},${arrow2.y}`;
+      path += `Z`;
+      // 连接到原来位置
+      path += `M${this.pointList[0].x},${this.pointList[0].y}`;
+      path += `L${this.pointList[1].x},${this.pointList[1].y}`;
+
+      path += `L${this.pointList[0].x},${this.pointList[0].y} `;
+      path += `L${this.pointList[this.pointList.length - 1].x},${
+        this.pointList[this.pointList.length - 1].y
+      } `;
+    }
+    path += `Z `;
+    return path;
+  }
+}
+class MarkPointObject extends ClickMarkObject {
+  constructor(box) {
+    super(box);
+    this.type = "polyline_arrow" as any;
+  }
+  /** 获取path  */
+  get pathData() {
+    let path = ``;
+    if (this.pointList.length) {
+      this.pointList.forEach((point, index) => {
+        if (index === 0) {
+          path += `M${point.x},${point.y}`;
+        } else {
+          path += `L${point.x},${point.y}`;
+        }
+      });
+      if (this.pointList.length >= 2) {
+        for (let i = 0; i < this.pointList.length - 1; i++) {
+          const [arrow1, arrow2] = MarkBoardUtils.getArrow(
+            this.pointList[i],
+            this.pointList[i + 1],
+            20 / this.box.t.a
+          );
+          path += `M${arrow1.x},${arrow1.y}`;
+          path += `L${this.pointList[i + 1].x},${this.pointList[i + 1].y}`;
+          path += `M${this.pointList[i + 1].x},${this.pointList[i + 1].y}`;
+          path += `L${arrow2.x},${arrow2.y}`;
+          path += `M${this.pointList[i + 1].x},${this.pointList[i + 1].y}`;
+        }
+      }
+    }
+    return path;
+  }
+}
 
 window.onload = onload;
 
@@ -13,11 +98,16 @@ function onload() {
   let mark: CanvasMarkBoard;
   let markObjectList: any[] = [];
   let labelInputElm: HTMLInputElement = document.querySelector("#labelInput");
+  let colorInputElm: HTMLInputElement = document.querySelector("#colorInput");
   let textareaElm: HTMLTextAreaElement = document.querySelector("#textarea");
   let labelInput = labelInputElm.value;
+  let colorInput = colorInputElm.value;
 
   labelInputElm.onchange = (e: any) => {
     labelInput = e.target.value;
+  };
+  colorInputElm.onchange = (e: any) => {
+    colorInput = e.target.value;
   };
   // 创建
   creact();
@@ -60,6 +150,8 @@ function onload() {
     mark = new CanvasMarkBoard({
       view: "#mark-box", // ID名或者DOM对象
     });
+    mark.register("sides_polygon", MarkSidesPolygonObject);
+    mark.register("polyline_arrow", MarkPointObject);
     mark?.setBackground(Img).then(() => {
       mark.setDrawType(mark.currentDrawingType || "rect");
     });
@@ -67,7 +159,7 @@ function onload() {
       mark.currentDrawingType = e.type;
     });
     mark.on("oncomplete", (e) => {
-      e.ok({ label: labelInput });
+      e.ok({ label: labelInput, color: colorInput });
     });
     mark.on("onchange", () => {
       markObjectList = mark.objects;

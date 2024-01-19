@@ -1,8 +1,93 @@
 <script setup lang="ts">
 import { onMounted, ref, computed } from "vue";
-import CanvasMarkBoard from "canvas-mark-board";
+import CanvasMarkBoard, {
+  ClickMarkObject,
+  MarkBoardUtils,
+} from "canvas-mark-board";
 import jsonData from "../../assets/data.json";
 import img from "../../assets/image.jpg";
+
+class MarkSidesPolygonObject extends ClickMarkObject {
+  constructor(box) {
+    super(box);
+    this.type = "point";
+  }
+  get pathData() {
+    let path = ``;
+    this.pointList.forEach((point, index) => {
+      if (index === 0) {
+        path += `M${point.x},${point.y}`;
+      } else {
+        path += `L${point.x},${point.y}`;
+      }
+    });
+    if (this.pointList.length >= 2) {
+      const [side1, side2] = MarkBoardUtils.getSides(
+        this.pointList[0],
+        this.pointList[1]
+      );
+      const [arrow1, arrow2] = MarkBoardUtils.getArrow(
+        side2,
+        side1,
+        20 / this.box.t.a
+      );
+      path += `Z`;
+      path += `M${side2.x},${side2.y}`;
+      path += `L${side1.x},${side1.y}`;
+      // 绘制三角形
+      path += `Z`;
+      path += `M${arrow1.x},${arrow1.y}`;
+      path += `L${side1.x},${side1.y}`;
+      path += `M${side1.x},${side1.y}`;
+      path += `L${arrow2.x},${arrow2.y}`;
+      path += `Z`;
+      // 连接到原来位置
+      path += `M${this.pointList[0].x},${this.pointList[0].y}`;
+      path += `L${this.pointList[1].x},${this.pointList[1].y}`;
+
+      path += `L${this.pointList[0].x},${this.pointList[0].y} `;
+      path += `L${this.pointList[this.pointList.length - 1].x},${
+        this.pointList[this.pointList.length - 1].y
+      } `;
+    }
+    path += `Z `;
+    return path;
+  }
+}
+class MarkPointObject extends ClickMarkObject {
+  constructor(box) {
+    super(box);
+    this.type = "polyline_arrow" as any;
+  }
+  /** 获取path  */
+  get pathData() {
+    let path = ``;
+    if (this.pointList.length) {
+      this.pointList.forEach((point, index) => {
+        if (index === 0) {
+          path += `M${point.x},${point.y}`;
+        } else {
+          path += `L${point.x},${point.y}`;
+        }
+      });
+      if (this.pointList.length >= 2) {
+        for (let i = 0; i < this.pointList.length - 1; i++) {
+          const [arrow1, arrow2] = MarkBoardUtils.getArrow(
+            this.pointList[i],
+            this.pointList[i + 1],
+            20 / this.box.t.a
+          );
+          path += `M${arrow1.x},${arrow1.y}`;
+          path += `L${this.pointList[i + 1].x},${this.pointList[i + 1].y}`;
+          path += `M${this.pointList[i + 1].x},${this.pointList[i + 1].y}`;
+          path += `L${arrow2.x},${arrow2.y}`;
+          path += `M${this.pointList[i + 1].x},${this.pointList[i + 1].y}`;
+        }
+      }
+    }
+    return path;
+  }
+}
 const shapeTypeList = [
   {
     viewBox: "0 0 1024 1024",
@@ -14,11 +99,7 @@ const shapeTypeList = [
     type: "polygon",
     icon: `M680.71 915.22H343.29c-39.53 0-76.37-21.27-96.12-55.52L78.46 567.49c-19.75-34.22-19.75-76.77 0-110.99l168.71-292.2c19.75-34.24 56.6-55.52 96.12-55.52h337.42c39.53 0 76.37 21.27 96.12 55.52l168.71 292.2c19.75 34.22 19.75 76.77 0 110.99L776.83 859.7c-19.75 34.24-56.59 55.52-96.12 55.52zM343.29 175.69c-15.7 0-30.35 8.43-38.21 22.04l-168.71 292.2c-7.84 13.61-7.84 30.52 0 44.13l168.71 292.2c7.86 13.61 22.51 22.04 38.21 22.04h337.42c15.7 0 30.35-8.43 38.21-22.04l168.71-292.2c7.84-13.61 7.84-30.52 0-44.13l-168.71-292.2c-7.86-13.61-22.51-22.04-38.21-22.04H343.29z`,
   },
-  {
-    viewBox: "0 0 1152 1024",
-    type: "sides_polygon",
-    icon: `M628.992 625.472l276.672 107.776-79.872 64 147.712 147.776a39.68 39.68 0 0 1-55.936 56.064l-153.984-153.984-89.6 71.936-44.992-293.568zM858.368 2.56l281.088 486.848-130.56 226.112a39.616 39.616 0 0 1-68.544-39.616l107.648-186.496-235.392-407.68H341.888l-235.392 407.68 235.392 407.68h234.496a39.552 39.552 0 1 1 0 79.168H296.192L15.04 489.344 296.192 2.56h562.176z`,
-  },
+
   {
     viewBox: "0 0 1024 1024",
     type: "circle",
@@ -44,6 +125,16 @@ const shapeTypeList = [
     type: "line_arrow",
     icon: "M593.066667 793.642667a32.170667 32.170667 0 0 1 0-45.226667l236.373333-236.373333L593.066667 275.626667a32 32 0 0 1 45.226666-45.184l258.986667 258.986666a32.170667 32.170667 0 0 1 0 45.226667l-258.986667 258.986667a31.914667 31.914667 0 0 1-45.226666 0z M149.333333 544a32.213333 32.213333 0 0 1-32-32 32.213333 32.213333 0 0 1 32-32h718.08a32.213333 32.213333 0 0 1 32 32 32.213333 32.213333 0 0 1-32 32z",
   },
+  {
+    viewBox: "0 0 1152 1024",
+    type: "sides_polygon",
+    icon: `M628.992 625.472l276.672 107.776-79.872 64 147.712 147.776a39.68 39.68 0 0 1-55.936 56.064l-153.984-153.984-89.6 71.936-44.992-293.568zM858.368 2.56l281.088 486.848-130.56 226.112a39.616 39.616 0 0 1-68.544-39.616l107.648-186.496-235.392-407.68H341.888l-235.392 407.68 235.392 407.68h234.496a39.552 39.552 0 1 1 0 79.168H296.192L15.04 489.344 296.192 2.56h562.176z`,
+  },
+  {
+    viewBox: "0 0 1024 1024",
+    type: "polyline_arrow",
+    icon: "M593.066667 793.642667a32.170667 32.170667 0 0 1 0-45.226667l236.373333-236.373333L593.066667 275.626667a32 32 0 0 1 45.226666-45.184l258.986667 258.986666a32.170667 32.170667 0 0 1 0 45.226667l-258.986667 258.986667a31.914667 31.914667 0 0 1-45.226666 0z M149.333333 544a32.213333 32.213333 0 0 1-32-32 32.213333 32.213333 0 0 1 32-32h718.08a32.213333 32.213333 0 0 1 32 32 32.213333 32.213333 0 0 1-32 32z",
+  },
 ];
 const objectListJson = computed(() => {
   return JSON.stringify(objectList.value);
@@ -57,6 +148,7 @@ function setDrawType(type: any) {
   mark.value?.setDrawType(type);
 }
 var labelInput = ref<string>("person");
+var colorInput = ref<string>("#ff0000");
 var objectList = ref<any[]>([]);
 
 onMounted(() => {
@@ -78,6 +170,8 @@ function createMark() {
   mark.value = new CanvasMarkBoard({
     view: "#mark-box",
   });
+  mark.value.register("sides_polygon", MarkSidesPolygonObject);
+  mark.value.register("polyline_arrow", MarkPointObject);
   mark.value.setBackground(img).then(() => {
     mark.value?.setDrawType("rect");
   });
@@ -88,7 +182,7 @@ function createMark() {
     drawType.value = e.type;
   });
   mark.value.on("oncomplete", (e) => {
-    e.ok({ label: labelInput.value });
+    e.ok({ label: labelInput.value, color: colorInput.value });
   });
   mark.value.on("onchange", () => {
     objectList.value = JSON.parse(JSON.stringify(mark.value?.objects));
@@ -159,7 +253,10 @@ function selectObj(id: string) {
         销毁
       </button>
 
-      标签名：<input type="text" v-model="labelInput" />
+      标签名：<input type="text" v-model="labelInput" /> 颜色：<input
+        type="color"
+        v-model="colorInput"
+      />
       <a class="remark">
         操作说明?
         <div>

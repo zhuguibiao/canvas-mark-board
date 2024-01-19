@@ -35,7 +35,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### CDN 使用
 ```html
- <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.1/dist/index.umd.js"></srcipt>  
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.2/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
@@ -59,9 +59,10 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 ## 配置项
 - `config` 配置项
 ```javascript
-{
+ new CanvasMarkBoard({
   lineWidth: 2,
-  color: 'red',   // 最终呈现颜色
   drawColor: 'yellow', // 绘制中的颜色
-}
+  fillColor: 'rgba(255,255,255,.5)'; // 选中填充颜色
+  showIndex: true; // 是否显示index
+});
 ```

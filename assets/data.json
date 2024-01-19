@@ -3,6 +3,7 @@
     "id": "f9e1cf23-8903-4f40-8ff9-724363190272",
     "label": "person",
     "type": "polygon",
+    "color": "gray",
     "pointList": [
       {
         "x": 257.7016248153619,
@@ -42,6 +43,7 @@
     "id": "f414b029-1311-43f8-b2e5-fa0508ce5740",
     "label": "women",
     "type": "rect",
+    "color": "blue",
     "pointList": [
       {
         "x": 653.8020679468241,
@@ -57,6 +59,7 @@
     "id": "b420899a-1488-4885-97a2-c9c4131a08e2",
     "label": "home",
     "type": "circle",
+    "color": "pink",
     "pointList": [
       {
         "x": 80.92171344165445,
@@ -72,6 +75,7 @@
     "id": "f0b68f67-7af1-4a69-8502-774ab07676cf",
     "label": "cloud",
     "type": "ellipse",
+    "color": "#20B4D9",
     "pointList": [
       {
         "x": 144.25997045790254,
@@ -87,6 +91,7 @@
     "id": "b2e9e160-ae8b-4992-a832-6423af623764",
     "label": "person",
     "type": "line",
+    "color": "#063D4E",
     "pointList": [
       {
         "x": 126.29837518463813,
@@ -102,6 +107,7 @@
     "id": "9aff9994-991e-44fe-b67e-7b57f31f751f",
     "label": "arrow",
     "type": "line_arrow",
+    "color": "#F924d2",
     "pointList": [
       {
         "x": 129.13441654357462,
@@ -117,6 +123,7 @@
     "id": "bb3f20df-1594-4dc8-b3e5-1262a4ae8ea6",
     "label": "person",
     "type": "polyline",
+    "color": "#E27A18",
     "pointList": [
       {
         "x": 849.4889217134416,
