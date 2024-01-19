@@ -38,7 +38,10 @@ export default defineConfig({
         },
         {
           text: "使用文档",
-          items: [{ text: "事件", link: "/guide/event" }],
+          items: [
+            { text: "自定义图形", link: "/guide/register" },
+            { text: "事件", link: "/guide/event" }
+        ],
         },
       ],
       "/demo/": [
