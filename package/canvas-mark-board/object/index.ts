@@ -6,7 +6,6 @@ import MarkObject from "./object";
 import MarkPolygonObject from "./polygon";
 import MarkPolylineObject from "./polyline";
 import MarkRectObject from "./rect";
-import MarkSidesPolygonObject from "./sides_polygon";
 import type { IObject } from "../types";
 enum MarkObjectType {
   NONE = "",
@@ -18,8 +17,6 @@ enum MarkObjectType {
   CIRCLE = "circle",
   /** 椭圆 */
   ELLIPSE = "ellipse",
-  /** 带方向的多边形 */
-  SIDES_POLYGON = "sides_polygon",
   /** 点 */
   POINT = "point",
   /** 线段 */
@@ -35,7 +32,6 @@ const markMap: IObject = {
   [MarkObjectType.POLYGON]: MarkPolygonObject!,
   [MarkObjectType.CIRCLE]: MarkCircleObject!,
   [MarkObjectType.ELLIPSE]: MarkEllipseObject!,
-  [MarkObjectType.SIDES_POLYGON]: MarkSidesPolygonObject!,
   [MarkObjectType.POLYLINE]: MarkPolylineObject!,
   [MarkObjectType.LINE]: MarkLineObject!,
   [MarkObjectType.LINE_ARROW]: MarkLineArrowObject!,

@@ -12,10 +12,15 @@ export default class MarkLineArrowObject extends MarkLineObject {
     super(box);
     this.type = MarkObjectType.LINE_ARROW;
   }
+
   get pathData() {
     let path = ``;
     if (this.pointList.length) {
-      if (this.pointList.length === 2) {
+      if (
+        this.pointList.length === 2 &&
+        this.pointList[0].x != this.pointList[1].x &&
+        this.pointList[0].y != this.pointList[1].y
+      ) {
         path += `M${this.pointList[0].x},${this.pointList[1].y}`;
         path += `L${this.pointList[0].x},${this.pointList[1].y}`;
 

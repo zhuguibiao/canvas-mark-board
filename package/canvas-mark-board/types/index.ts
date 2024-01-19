@@ -4,13 +4,14 @@ export interface IMarkBoardConfig {
   view: string;
   color?: string;
   drawColor?: string;
+  fillColor?: string;
+  showIndex?: boolean;
 }
 
 /**画线类型 */
 export type IMarkBoardDrawType =
   | "rect"
   | "polygon"
-  | "sides_polygon"
   | "circle"
   | "ellipse"
   | "line"
@@ -31,6 +32,7 @@ export interface IObjectCompleteHandle {
 export interface IMarkObjectJSON {
   index: number;
   label: string;
+  color?: string;
   type: IMarkBoardDrawType;
   pointList: IPointData[];
 }
@@ -68,12 +70,18 @@ export interface ICanvasMarkBoard extends IEventer {
   canvas: HTMLCanvasElement;
   regionCanvas: HTMLCanvasElement;
   lastMovePoint: IPointData;
+  renderGroup: any[];
   init: (config: any) => void;
+  register: (type: string, obj: any) => void;
   createCanvas: () => HTMLCanvasElement;
   clearCanvas: (ctx: CanvasRenderingContext2D) => void;
   render: IFunction;
   destroy: IFunction;
   imgTrans: IFunction;
+  getDrawMark: (
+    event: "boxMousedown" | "boxMousemove" | "boxMouseup",
+    point: IPointData
+  ) => void;
   transfrom: () => void;
   setLayout: (img: HTMLImageElement) => void;
   setBackground: (path: string) => Promise<unknown>;

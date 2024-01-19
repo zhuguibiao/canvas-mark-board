@@ -1,10 +1,5 @@
 import CanvasMarkBoard from "../index";
-import type {
-  IPointData,
-  IObjectLabelData,
-  IMarkObjectJSON,
-  IMarkBoardDrawType,
-} from "../types";
+import type { IPointData, IMarkObjectJSON, IMarkBoardDrawType } from "../types";
 interface MarkObject {
   /** 销毁 */
   destory(): void;
@@ -16,6 +11,9 @@ interface MarkObject {
   export(): IMarkObjectJSON;
   /** 判断点是否在内部 */
   isPointInside(point: IPointData): boolean;
+  boxMousedown(point: IPointData): void;
+  boxMousemove(point: IPointData): void;
+  boxMouseup(point: IPointData): void;
   /** path数据 */
   pathData: string;
   indexPoint: IPointData;
@@ -39,6 +37,7 @@ class MarkObject implements MarkObject {
   type!: IMarkBoardDrawType;
   // 标签
   label: string = "";
+  color: string = "#ff0000";
   // 序号
   index: number = 1;
   // 父级容器
@@ -57,19 +56,12 @@ class MarkObject implements MarkObject {
   lastMousePoint?: IPointData = { x: 0, y: 0 };
   /** 激活点位 */
   acctivePointIndex: number = -1;
-  /**
-   * 设置标签
-   * @param data
-   */
-  setLabel(data: IObjectLabelData) {
-    this.label = data.label;
-    this.render();
-  }
+
   /**
    * 设置选中状态
    * @param select
    */
-  setSelect(select: boolean) {
+  setSelect(select?: boolean) {
     // 清空已有选中
     if (this.box.selectObject) {
       this.box.selectObject.status = "done";

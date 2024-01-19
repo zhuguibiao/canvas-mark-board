@@ -1,6 +1,6 @@
 {
   "name": "canvas-mark-board",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "type": "module",
   "main": "./dist/index.esm.js",
   "unpkg": "./dist/index.umd.js",
@@ -20,6 +20,12 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhuguibiao/canvas-mark-board"
+  },
+  "homepage": "https://zhuguibiao.github.io/canvas-mark-board",
+  "license": "MIT",
   "scripts": {
     "build": "NODE_ENV=production rollup -c"
   },
