@@ -2,7 +2,6 @@
 export interface IMarkBoardConfig {
   lineWidth?: number;
   view: string;
-  color?: string;
   drawColor?: string;
   fillColor?: string;
   showIndex?: boolean;
@@ -72,7 +71,6 @@ export interface ICanvasMarkBoard extends IEventer {
   lastMovePoint: IPointData;
   renderGroup: any[];
   init: (config: any) => void;
-  register: (type: string, obj: any) => void;
   createCanvas: () => HTMLCanvasElement;
   clearCanvas: (ctx: CanvasRenderingContext2D) => void;
   render: IFunction;

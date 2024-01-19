@@ -1,16 +1,8 @@
 import { MarkObjectType } from ".";
 import CanvasMarkBoard from "..";
-import { Circle } from "../shapes";
-import {
-  getMinDistance,
-  getUUID,
-  isPointInPolygon,
-  isSamePoint,
-} from "../utils";
-import MarkObject from "./object";
-import MarkRectObject from "./rect";
+import { isPointInPolygon } from "../utils";
 import MoveMarkObject from "./moveMark";
-import type { IPointData, IObjectLabelData, IMarkObjectJSON } from "../types";
+import type { IPointData } from "../types";
 
 /**
  * 标注对象 Line (线段)

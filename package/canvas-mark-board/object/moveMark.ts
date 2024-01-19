@@ -37,7 +37,7 @@ export default class MoveMarkObject extends MarkObject {
     }
   }
   setCursor() {}
-  setMoveEdit(offset?: any) {}
+  setMoveEdit(_offset?: any) {}
   /** 鼠标移动 */
   boxMousemove() {
     if (this.box.selectObject) {
@@ -230,14 +230,14 @@ export default class MoveMarkObject extends MarkObject {
             ctx,
             center: item,
             radius: 8 / zoom,
-            fillColor: this.box.config.color!,
+            fillColor: this.color!,
           });
         } else {
           circle = new Circle({
             ctx,
             center: item,
             radius: 4 / zoom,
-            fillColor: this.box.config.color!,
+            fillColor: this.color!,
           });
         }
         circle.draw();

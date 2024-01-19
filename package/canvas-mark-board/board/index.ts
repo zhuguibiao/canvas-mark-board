@@ -1,8 +1,10 @@
 import { Eventer } from "../decorator/event";
 import { useModule } from "../decorator/rewrite";
 import { markMap, MarkObject, MarkObjectType } from "../object/index";
-import { MatrixHelper } from "../utils";
-const { scaleOfOuter } = MatrixHelper;
+import ClickMarkObject from "../object/clickMark";
+import MoveMarkObject from "../object/moveMark";
+import * as MarkBoardUtils from "../utils";
+const { scaleOfOuter } = MarkBoardUtils.MatrixHelper;
 
 import type {
   ICanvasMarkBoard,
@@ -21,6 +23,16 @@ import type {
 
 @useModule(Eventer)
 export default class CanvasMarkBoard implements ICanvasMarkBoard {
+  static MoveMarkObject = MoveMarkObject;
+  static ClickMarkObject = ClickMarkObject;
+  static markMap = markMap;
+  static MarkBoardUtils = MarkBoardUtils;
+  static register(type: string, markObject: any) {
+    if (!type || !markObject) {
+      throw new Error(`need type or markObject`);
+    }
+    CanvasMarkBoard.markMap[type] = markObject;
+  }
   view!: HTMLElement;
   canvas!: HTMLCanvasElement;
   img!: HTMLImageElement;
@@ -28,7 +40,6 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
   ctx!: CanvasRenderingContext2D;
   regionCtx!: CanvasRenderingContext2D;
   config: Omit<IMarkBoardConfig, "view"> = {
-    color: "red",
     drawColor: "yellow",
     lineWidth: 2,
     fillColor: "rgba(255, 255, 255, 0.3)",
@@ -83,13 +94,6 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     this.windowKeyup = this.windowKeyup.bind(this);
     window.addEventListener("keydown", this.windowKeydown);
     window.addEventListener("keyup", this.windowKeyup);
-  }
-
-  register(type: string, markObject: any) {
-    if (!type || !markObject) {
-      throw new Error(`need type or markObject`);
-    }
-    this.markMap[type] = markObject;
   }
 
   get viewDomInfo() {
@@ -409,6 +413,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
           id: obj.id,
           label: obj.label,
           type: obj.type,
+          color: obj.color,
           select: obj.id === this.selectObject?.id,
           pointList: obj.pointList,
         };
@@ -419,7 +424,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     let obj = null;
     if (this.currentDrawingType) {
       try {
-        obj = new this.markMap[this.currentDrawingType](this);
+        obj = new CanvasMarkBoard.markMap[this.currentDrawingType](this);
       } catch (err) {
         throw new Error(
           `${this.currentDrawingType} mark type is not supported`
@@ -436,7 +441,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
       let obj;
       if (item.type) {
         try {
-          obj = this.markMap[item.type].import(this, item);
+          obj = CanvasMarkBoard.markMap[item.type].import(this, item);
         } catch (err) {
           throw new Error(`${item.type} mark type is not supported`);
         }

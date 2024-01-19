@@ -242,7 +242,7 @@ export default class ClickMarkObject extends MarkObject {
           ctx,
           center: item,
           radius: 4 / zoom,
-          fillColor: this.box.config.color!,
+          fillColor: this.color!,
         });
         this.group.push(circle);
         circle.draw();
@@ -264,14 +264,14 @@ export default class ClickMarkObject extends MarkObject {
             ctx,
             center: item,
             radius: 8 / zoom,
-            fillColor: this.box.config.color!,
+            fillColor: this.color!,
           });
         } else {
           circle = new Circle({
             ctx,
             center: item,
             radius: 4 / zoom,
-            fillColor: this.box.config.color!,
+            fillColor: this.color!,
           });
         }
         this.group.push(circle);
