@@ -49,15 +49,15 @@ export default defineConfig({
           text: "demo",
           items: [
             {
-              text: "js-demo",
+              text: "js-demo源码",
               link: "/demo/js-demo",
             },
             {
-              text: "vue-demo",
+              text: "vue-demo源码",
               link: "/demo/vue-demo",
             },
             {
-              text: "react-demo",
+              text: "react-demo源码",
               link: "/demo/react-demo",
             },
           ],

@@ -3,6 +3,8 @@
 ## 简介
 `canvas-mark-board` 基于原生canvas封装的图像标注工具，在 vue / react / 原生js 应用中都可以实现标注功能。提供了一系列事件和方法，用于管理标注对象、绘制标注形状、导入标注数据等操作。
 
+注：目前是beta版本，后期api和架构可能会change，关注update
+
 [原生js在线演示](https://zhuguibiao.github.io/canvas-mark-board/js-demo/)
 
 [vue在线演示](https://zhuguibiao.github.io/canvas-mark-board/vue-demo/)
@@ -35,7 +37,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### CDN 使用
 ```html
- <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.4/dist/index.umd.js"></srcipt>  
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.5/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
@@ -53,7 +55,7 @@ const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
 })
 mark.setDrawType('rect')
-mark.on('oncomplete',(e)=>{e.ok({})})
+mark.on('oncomplete',(e)=>{e.ok({ label:'person', color:'blue' })})
 ```
 
 ## 自定义图形
@@ -67,5 +69,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
   drawColor: 'yellow', // 绘制中的颜色
   fillColor: 'rgba(255,255,255,.5)'; // 选中填充颜色
   showIndex: true; // 是否显示index
+  disableZoom: false; // 是否关闭缩放画板功能
+  disableMove: false; // 是否关闭移动画板功能
 });
 ```

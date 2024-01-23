@@ -12,3 +12,14 @@
   display: none;
   z-index: 999;
 }
+
+.GitHub-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+}

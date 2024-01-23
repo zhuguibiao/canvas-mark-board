@@ -72,5 +72,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
   drawColor: 'yellow', // 绘制中的颜色
   fillColor: 'rgba(255,255,255,.5)'; // 选中填充颜色
   showIndex: true; // 是否显示index
+  disableZoom: false; // 是否关闭缩放画板功能
+  disableMove: false; // 是否关闭移动画板功能
 });
 ```

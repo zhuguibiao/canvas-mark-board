@@ -1,14 +1,14 @@
 {
-  "name": "react-demo",
+  "name": "custom-mark",
   "private": true,
   "type": "module",
+  "main": "index",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
   },
   "dependencies": {
-    "canvas-mark-board": "workspace:*",
-    "custom-mark": "workspace:*"
+    "canvas-mark-board": "workspace:*"
   },
   "devDependencies": {
     "vite": "^5.0.0"
