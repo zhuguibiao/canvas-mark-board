@@ -25,14 +25,8 @@ import type {
 export default class CanvasMarkBoard implements ICanvasMarkBoard {
   static MoveMarkObject = MoveMarkObject;
   static ClickMarkObject = ClickMarkObject;
-  static markMap = markMap;
   static MarkBoardUtils = MarkBoardUtils;
-  static register(type: string, markObject: any) {
-    if (!type || !markObject) {
-      throw new Error(`need type or markObject`);
-    }
-    CanvasMarkBoard.markMap[type] = markObject;
-  }
+
   view!: HTMLElement;
   canvas!: HTMLCanvasElement;
   img!: HTMLImageElement;
@@ -54,11 +48,9 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
   mouseDown = false;
   // 拖拽状态
   drag = false;
-  /** 选中标注对象下标 */
+  /** 选中标注对象 */
   selectObject?: MarkObject;
-  // 当前绘制类型
   currentDrawingType: IMarkBoardDrawType = MarkObjectType.NONE;
-  // 标注对象列表
   markObjectList: MarkObject[] = [];
   renderGroup: any[] = [];
   markMap: any = markMap;
@@ -96,6 +88,13 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     window.addEventListener("keyup", this.windowKeyup);
   }
 
+  register(type: string, markObject: any) {
+    if (!type || !markObject) {
+      throw new Error(`need type or markObject`);
+    }
+    this.markMap[type] = markObject;
+  }
+
   get viewDomInfo() {
     return this.view.getBoundingClientRect();
   }
@@ -103,6 +102,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     if (!this.lastMovePoint) return null;
     return this.lastMovePoint;
   }
+
   /** 创建canvas */
   createCanvas() {
     let canvas = document.createElement("canvas");
@@ -151,6 +151,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
         this.img.src = path;
         this.img.style.position = "absolute";
         this.img.style.userSelect = "none";
+        this.img.style.pointerEvents = "none";
       }
       this.img.onload = () => {
         this.view.insertBefore(this.img, this.canvas);
@@ -203,7 +204,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     this.renderGroup = [];
     this.clearCanvas(this.ctx);
     this.ctx.font = `bold ${~~(16 / this.t.a)}px serif`;
-    this.ctx.lineWidth = 2 / this.t.a;
+    this.ctx.lineWidth = this.config.lineWidth / this.t.a;
     this.markObjectList.map((item, index) => {
       if (item.status !== "draw" && this.config.showIndex) {
         /**render 序号 */
@@ -222,6 +223,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
 
   /** 缩放 */
   appWheel(e: WheelEvent) {
+    if (this.config.disableZoom) return;
     if (e.metaKey || e.ctrlKey || e.altKey) {
       e.preventDefault();
       const center = { x: e.offsetX, y: e.offsetY };
@@ -244,6 +246,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
   }
   /** 平移事件 */
   appMoving(point: IPointData) {
+    if (this.config.disableMove) return;
     this.view.style.cursor = "grab";
     let moveX = (point.x - this.lastMovePoint.x) * this.t.a;
     let moveY = (point.y - this.lastMovePoint.y) * this.t.a;
@@ -309,7 +312,10 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     // 如果有选中并且在里面
     // TODO: 优化一下
     if (this.selectObject && this.drag) {
-      if (!this.selectObject.isPointInside(point)) {
+      if (
+        !this.selectObject.isPointInside(point) &&
+        this.selectObject.acctivePointIndex === -1
+      ) {
         this.selectObject = undefined;
       }
       this.drag = false;
@@ -325,7 +331,6 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
       lastMark.pointList.length > 0 &&
       lastMark?.pointList?.[0]?.x !== lastMark?.pointList?.[1]?.x
     ) {
-      // 取消选中验证
       this.selectObject = undefined;
     } else {
       let index = this.getSelectedIndex(point);
@@ -415,7 +420,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
           type: obj.type,
           color: obj.color,
           select: obj.id === this.selectObject?.id,
-          pointList: obj.pointList,
+          pointList: obj.resultPoints || obj.pointList,
         };
       });
   }
@@ -424,7 +429,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     let obj = null;
     if (this.currentDrawingType) {
       try {
-        obj = new CanvasMarkBoard.markMap[this.currentDrawingType](this);
+        obj = new this.markMap[this.currentDrawingType](this);
       } catch (err) {
         throw new Error(
           `${this.currentDrawingType} mark type is not supported`
@@ -441,7 +446,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
       let obj;
       if (item.type) {
         try {
-          obj = CanvasMarkBoard.markMap[item.type].import(this, item);
+          obj = this.markMap[item.type].import(this, item);
         } catch (err) {
           throw new Error(`${item.type} mark type is not supported`);
         }

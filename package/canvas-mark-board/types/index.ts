@@ -5,6 +5,8 @@ export interface IMarkBoardConfig {
   drawColor?: string;
   fillColor?: string;
   showIndex?: boolean;
+  disableZoom?: boolean;
+  disableMove?: boolean;
 }
 
 /**画线类型 */

@@ -212,17 +212,22 @@ export default class ClickMarkObject extends MarkObject {
   get indexPoint() {
     return this.pointList[0];
   }
+  get resultPoints(): IPointData[] {
+    return this.pointList;
+  }
   /** 渲染 */
   render() {
     this.removeAll();
-    let ctx = this.box.regionCtx;
+    let {
+      config,
+      regionCtx: ctx,
+      t: { a: zoom },
+    } = this.box;
     if (!this.box.selectObject) {
       this.box.clearCanvas(ctx);
     }
-    let zoom = this.box.t.a;
-    ctx.lineWidth = this.box.config.lineWidth! / zoom;
-    ctx.strokeStyle =
-      this.status === "draw" ? this.box.config.drawColor! : this.color!;
+    ctx.lineWidth = config.lineWidth! / zoom;
+    ctx.strokeStyle = this.status === "draw" ? config.drawColor! : this.color!;
     if (this.status === "draw") {
       let path = this.pathData;
       if (this.pointList.length >= 2) {
@@ -255,7 +260,7 @@ export default class ClickMarkObject extends MarkObject {
       this.group.push(drawPath);
       ctx.stroke(drawPath);
       ctx.fillStyle =
-        this.status === "edit" ? this.box.config.fillColor  : "rgba(0,0,0,0)";
+        this.status === "edit" ? config.fillColor : "rgba(0,0,0,0)";
       ctx.fill(new Path2D(this.pathData));
       this.pointList.map((item, index) => {
         let circle = null;
@@ -279,14 +284,12 @@ export default class ClickMarkObject extends MarkObject {
       });
     }
   }
-
   /** 判断点是否在多边形内部 */
   isPointInside(point: IPointData): boolean {
     let expand = this.expent / this.box.t.a;
     let offset = isPointInPolygon(point, this.pointList);
     return offset < expand;
   }
-
   /** 导入 */
   static import(box: CanvasMarkBoard, data: IMarkObjectJSON) {
     let obj = new this(box);

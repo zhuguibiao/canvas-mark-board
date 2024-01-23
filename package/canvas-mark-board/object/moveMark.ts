@@ -14,12 +14,6 @@ export default class MoveMarkObject extends MarkObject {
     this.minPointCount = 2;
     this.box = box;
     this.index = box.markObjectList.length + 1;
-    // 盒子事件
-    // this.boxEventIds = [
-    //   this.box.on_("onmousemove", this.boxMousemove, this),
-    //   this.box.on_("onmousedown", this.boxMousedown, this),
-    //   this.box.on_("onmouseup", this.boxMouseup, this),
-    // ];
   }
 
   /** 鼠标按下 */
@@ -124,7 +118,6 @@ export default class MoveMarkObject extends MarkObject {
   }
   /** 销毁 */
   destory() {
-    // this.box.off_(this.boxEventIds);
     this.pointList = [];
     this.removeAll();
   }
@@ -171,11 +164,10 @@ export default class MoveMarkObject extends MarkObject {
     this.box.addObjectData();
   }
   get vertexList(): IPointData[] {
-    if (this.pointList.length === 2) {
-      return [this.pointList[0], this.pointList[1]];
-    } else {
-      return [];
-    }
+    return this.pointList;
+  }
+  get resultPoints() {
+    return this.pointList;
   }
   /** 获取path  */
   get pathData() {
@@ -200,17 +192,17 @@ export default class MoveMarkObject extends MarkObject {
   /** 渲染 */
   render() {
     this.removeAll();
-
-    let zoom = this.box.t.a;
-    let ctx = this.box.regionCtx;
-
+    let {
+      config,
+      regionCtx: ctx,
+      t: { a: zoom },
+    } = this.box;
     if (!this.box.selectObject) {
       this.box.clearCanvas(ctx);
     }
     // 线宽
-    ctx.lineWidth = this.box.config.lineWidth! / zoom;
-    ctx.strokeStyle =
-      this.status === "draw" ? this.box.config.drawColor! : this.color!;
+    ctx.lineWidth = config.lineWidth! / zoom;
+    ctx.strokeStyle = this.status === "draw" ? config.drawColor! : this.color!;
     let path = new Path2D(this.pathData);
     this.group.push(path);
 
@@ -221,7 +213,7 @@ export default class MoveMarkObject extends MarkObject {
       this.box.clearCanvas(ctx);
       ctx.stroke(path);
       ctx.fillStyle =
-        this.status === "edit" ? this.box.config.fillColor : "rgba(0,0,0,0)";
+        this.status === "edit" ? config.fillColor : "rgba(0,0,0,0)";
       ctx.fill(path);
       this.vertexList.map((item, index) => {
         let circle = null;

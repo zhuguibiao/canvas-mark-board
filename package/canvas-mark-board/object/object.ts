@@ -17,6 +17,7 @@ interface MarkObject {
   /** path数据 */
   pathData: string;
   indexPoint: IPointData;
+  resultPoints?: IPointData[];
 }
 
 /**
