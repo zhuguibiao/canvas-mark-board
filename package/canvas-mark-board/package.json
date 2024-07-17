@@ -1,6 +1,6 @@
 {
   "name": "canvas-mark-board",
-  "version": "0.0.1-beta.5",
+  "version": "0.0.1-beta.6",
   "type": "module",
   "main": "./dist/index.esm.js",
   "unpkg": "./dist/index.umd.js",
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zhuguibiao/canvas-mark-board"
+    "url": "git+https://github.com/zhuguibiao/canvas-mark-board.git"
   },
   "homepage": "https://zhuguibiao.github.io/canvas-mark-board",
   "license": "MIT",
