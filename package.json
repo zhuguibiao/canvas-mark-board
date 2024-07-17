@@ -1,8 +1,8 @@
 {
 	"type": "module",
 	"scripts": {
-		"dev": "pnpm run dev:react",
-		"dev:demo": "pnpm run -C play/js-demo dev",
+		"dev": "pnpm run dev:demo",
+		"dev:demo": "pnpm run -C play/react-demo dev",
 		"dev:docs": "pnpm run -C docs/ dev",
 		"build": "pnpm run -C  package/canvas-mark-board build",
 		"build:docs": "pnpm run -C docs/ build",

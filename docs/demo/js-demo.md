@@ -11,7 +11,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mark-board</title>
-  <script src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.5/dist/index.umd.js"></script>
+  <script src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.6/dist/index.umd.js"></script>
 </head>
 <style>
   * { 

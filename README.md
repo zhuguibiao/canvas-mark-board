@@ -37,7 +37,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### CDN 使用
 ```html
- <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.5/dist/index.umd.js"></srcipt>  
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.6/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
@@ -49,7 +49,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### ESM 使用
 ```js 
-import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.4/dist/index.esm.js'
+import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.6/dist/index.esm.js'
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
@@ -72,4 +72,10 @@ mark.on('oncomplete',(e)=>{e.ok({ label:'person', color:'blue' })})
   disableZoom: false; // 是否关闭缩放画板功能
   disableMove: false; // 是否关闭移动画板功能
 });
+```
+
+## 开发
+```sh
+pnpm install 
+pnpm dev
 ```

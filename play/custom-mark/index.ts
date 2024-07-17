@@ -1,4 +1,4 @@
-import CanvasMarkBoard from "canvas-mark-board";
+import CanvasMarkBoard from "../../package/canvas-mark-board/index";
 const { ClickMarkObject, MoveMarkObject, MarkBoardUtils } = CanvasMarkBoard;
 
 /** 自定义带方向的线 */
