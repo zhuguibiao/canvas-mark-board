@@ -3,12 +3,12 @@ import CanvasMarkBoard from "..";
 import MoveMarkObject from "./moveMark";
 import type { IPointData } from "../types";
 /**
- * 标注对象 POLYGON
+ * 标注对象 RECT
  */
 export default class MarkPolygonObject extends MoveMarkObject {
   constructor(box: CanvasMarkBoard) {
     super(box);
-    this.type = MarkObjectType.POLYGON;
+    this.type = MarkObjectType.RECT;
     this.minPointCount = 2;
   }
   setCursor() {
