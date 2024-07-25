@@ -1,4 +1,4 @@
-import MarkBoard from "../../package/canvas-mark-board/index";
+import MarkBoard from "canvas-mark-board";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import jsonData from "../../assets/data.json";

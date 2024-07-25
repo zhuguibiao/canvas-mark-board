@@ -1,4 +1,4 @@
-import CanvasMarkBoard from "../../package/canvas-mark-board/index";
+import CanvasMarkBoard from "canvas-mark-board";
 import Img from "../../assets/image.jpg";
 import json from "../../assets/data.json";
 import shapeMap from "../../assets/shapeMap.json";
