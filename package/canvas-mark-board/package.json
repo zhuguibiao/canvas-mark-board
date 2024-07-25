@@ -8,12 +8,11 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "dev": "./index.ts",
       "import": {
-        "dev":"./index.ts",
         "default": "./dist/index.esm.js"
       },
       "require": {
-        "dev":"./index.ts",
         "default": "./dist/index.cjs"
       }
     },
