@@ -452,7 +452,7 @@ function onload() {
       if (e.target.dataset.type) {
         switch (e.target.dataset.type) {
           case "del":
-            mark.devareObject(e.target.dataset.id);
+            mark.deleteObject(e.target.dataset.id);
             break;
           default:
             break;
