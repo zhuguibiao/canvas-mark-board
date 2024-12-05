@@ -9,6 +9,7 @@ import {
   MarkSidesArrowObject,
   MarkPolylineArrowObject,
   MarkTriangleObject,
+  MarkDotObject,
 } from "custom-mark";
 
 const objectListJson = computed(() => {
@@ -44,11 +45,13 @@ function createMark() {
   if (mark.value) return;
   mark.value = new CanvasMarkBoard({
     view: "#mark-box",
+     showIndex: false,
   });
 
   mark.value.register("sides_arrow", MarkSidesArrowObject);
   mark.value.register("polyline_arrow", MarkPolylineArrowObject);
   mark.value.register("triangle", MarkTriangleObject);
+  mark.value.register("dot", MarkDotObject);
 
   mark.value.setBackground(img).then(() => {
     mark.value?.setDrawType("rect");

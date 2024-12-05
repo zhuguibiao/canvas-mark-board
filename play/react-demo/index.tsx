@@ -6,6 +6,7 @@ import {
   MarkSidesArrowObject,
   MarkPolylineArrowObject,
   MarkTriangleObject,
+  MarkDotObject,
 } from "custom-mark";
 import img from "../../assets/image.jpg";
 import shapeTypeList from "../../assets/shapeMap.json";
@@ -33,6 +34,7 @@ function Index() {
     mark.current.register("sides_arrow", MarkSidesArrowObject);
     mark.current.register("polyline_arrow", MarkPolylineArrowObject);
     mark.current.register("triangle", MarkTriangleObject);
+    mark.current.register("dot", MarkDotObject);
 
     mark.current.on("ondraw", (e) => {
       mark.current!.currentDrawingType = e.type;

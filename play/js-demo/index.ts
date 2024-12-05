@@ -6,6 +6,7 @@ import {
   MarkSidesArrowObject,
   MarkPolylineArrowObject,
   MarkTriangleObject,
+  MarkDotObject,
 } from "custom-mark";
 window.onload = onload;
 
@@ -90,11 +91,13 @@ function onload() {
     if (mark) return;
     mark = new CanvasMarkBoard({
       view: "#mark-box", // ID名或者DOM对象
+      showIndex: false,
     });
 
     mark.register("sides_arrow", MarkSidesArrowObject);
     mark.register("polyline_arrow", MarkPolylineArrowObject);
     mark.register("triangle", MarkTriangleObject);
+    mark.register("dot", MarkDotObject);
 
     mark?.setBackground(Img).then(() => {
       mark.setDrawType(mark.currentDrawingType || "rect");
