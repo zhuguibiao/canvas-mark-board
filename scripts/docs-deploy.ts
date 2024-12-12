@@ -9,7 +9,7 @@ const projects = [
   { name: "deploy", path: "./docs", run: "pnpm run deploy" },
 ];
 
-const buildProject = (project) => {
+const buildProject = (project: (typeof projects)[0]) => {
   return new Promise((resolve, reject) => {
     console.log(`Building ${project.name}...`);
     const projectPath = path.resolve(project.path);
