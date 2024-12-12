@@ -1,6 +1,5 @@
 import MarkBoard from "canvas-mark-board";
 import React, { useEffect, useRef, useState } from "react";
-import { createRoot } from "react-dom/client";
 import jsonData from "../../assets/data.json";
 import {
   MarkSidesArrowObject,
@@ -11,8 +10,8 @@ import {
 import img from "../../assets/image.jpg";
 import shapeTypeList from "../../assets/shapeMap.json";
 
-function Index() {
-  const mark = useRef<MarkBoard>();
+function App() {
+  const mark = useRef<MarkBoard>(null);
   const labelRef = useRef(null);
   const colorRef = useRef(null);
   const [objectList, setObjectList] = useState<any>([]);
@@ -194,6 +193,7 @@ function Index() {
       </div>
       <textarea
         style={{ width: "100%" }}
+        readOnly
         value={JSON.stringify(objectList)}
         cols={30}
         rows={10}
@@ -201,5 +201,4 @@ function Index() {
     </div>
   );
 }
-const root = createRoot(document.getElementById("root"));
-root.render(<Index />);
+export default App;
