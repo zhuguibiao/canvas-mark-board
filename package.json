@@ -12,12 +12,12 @@
 		"deploy": "pnpm run -C docs/ deploy"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^25.0.7",
-		"@rollup/plugin-node-resolve": "^15.2.3",
-		"@rollup/plugin-terser": "^0.4.4",
-		"@rollup/plugin-typescript": "^11.1.5",
-		"rollup": "^4.6.0",
-		"tslib": "^2.6.2",
-		"typescript": "^5.2.2"
+		"@rollup/plugin-commonjs": "catalog:",
+		"@rollup/plugin-node-resolve": "catalog:",
+		"@rollup/plugin-terser": "catalog:",
+		"@rollup/plugin-typescript": "catalog:",
+		"rollup": "catalog:",
+		"tslib": "catalog:",
+		"typescript": "catalog:"
 	}
 }

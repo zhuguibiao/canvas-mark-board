@@ -7,15 +7,15 @@
     "build": "vite build"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "catalog:react18",
+    "react-dom": "catalog:react18",
     "canvas-mark-board": "workspace:*",
     "custom-mark": "workspace:*"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0"
+    "vite": "catalog:",
+    "@vitejs/plugin-react": "catalog:react18",
+    "@types/react": "catalog:react18",
+    "@types/react-dom": "catalog:react18"
   }
 }

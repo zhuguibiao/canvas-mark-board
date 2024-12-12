@@ -11,6 +11,6 @@
     "custom-mark": "workspace:*"
   },
   "devDependencies": {
-    "vite": "^5.0.0"
+    "vite": "catalog:"
   }
 }

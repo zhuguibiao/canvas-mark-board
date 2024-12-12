@@ -7,13 +7,11 @@
     "preinstall": "npx only-allow pnpm",
     "deploy": "gh-pages -d .vitepress/dist"
   },
-  "dependencies": {
-    "vitepress": "1.0.0-rc.31"
-  },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
-    "@types/node": "^20.10.3",
+    "@types/markdown-it": "catalog:",
+    "@types/node": "catalog:",
     "canvas-mark-board": "workspace:*",
-    "gh-pages": "^6.1.0"
+    "gh-pages": "catalog:",
+    "vitepress": "catalog:"
   }
 }

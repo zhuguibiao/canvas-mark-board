@@ -6,13 +6,13 @@
     "build": "vite build"
   },
   "dependencies": {
-    "vue": "^3.3.4",
+    "vue": "catalog:vue3",
     "canvas-mark-board": "workspace:*",
     "custom-mark": "workspace:*"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "@vue/compiler-sfc": "^3.3.9",
-    "@vitejs/plugin-vue": "^4.2.3"
+    "vite": "catalog:",
+    "@vue/compiler-sfc": "catalog:vue3",
+    "@vitejs/plugin-vue": "catalog:vue3"
   }
 }
