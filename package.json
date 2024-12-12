@@ -5,11 +5,7 @@
 		"dev:demo": "pnpm run -C play/react-demo dev",
 		"dev:docs": "pnpm run -C docs/ dev",
 		"build": "pnpm run -C  package/canvas-mark-board build",
-		"build:docs": "pnpm run -C docs/ build",
-		"build:vue": "pnpm run -C play/vue-demo build",
-		"build:react": "pnpm run -C play/react-demo build",
-		"build:js": "pnpm run -C play/js-demo build",
-		"deploy": "pnpm run -C docs/ deploy"
+		"deploy:docs": "npx tsx scripts/docs-deploy"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "catalog:",
