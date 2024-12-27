@@ -1,7 +1,7 @@
 <h1 align="center">canvas-mark-board</h1>
 <div align="center">
 
-[English](./README.en.md)  | 简体中文
+English | [简体中文](./README.md) 
 
 </div>
 
@@ -14,21 +14,19 @@
   </a>
 </p>
 
-**canvas-mark-board** 基于原生canvas封装的图像标注工具，在 vue / react / 原生js 应用中都可以实现标注功能。提供了一系列事件和方法，用于管理标注对象、绘制标注形状、导入标注数据等操作。
+**canvas-mark-board** image annotation tool based on  canvas package, in vue / react / native js applications can realize the annotation function. Provides a series of events and methods for managing labeled objects, drawing labeled shapes, importing labeled data and other operations.
 
-注：目前是beta版本，后期api和架构可能会change，关注update
+note：Currently a beta version, later api and architecture may change, pay attention to the update
 
-[原生js在线演示](https://zhuguibiao.github.io/canvas-mark-board/js-demo/)
+[js-demo](https://zhuguibiao.github.io/canvas-mark-board/js-demo/)
+[vue-demo](https://zhuguibiao.github.io/canvas-mark-board/vue-demo/)
+[react-demo](https://zhuguibiao.github.io/canvas-mark-board/react-demo/)
 
-[vue在线演示](https://zhuguibiao.github.io/canvas-mark-board/vue-demo/)
-
-[react在线演示](https://zhuguibiao.github.io/canvas-mark-board/react-demo/)
-
-## 文档
-[文档](https://zhuguibiao.github.io/canvas-mark-board/)
+## Doc
+[Doc Link](https://zhuguibiao.github.io/canvas-mark-board/)
 
 
-## 安装
+## Install
 
 ```shell
 pnpm add canvas-mark-board
@@ -36,58 +34,58 @@ npm install canvas-mark-board
 yarn add canvas-mark-board
 ```
 
-## 使用
+## Use
 
-### 工具模块使用
+### Module
 ```tsx
 import CanvasMarkBoard from 'canvas-mark-board'
 const mark = new CanvasMarkBoard({
-  view: "#mark-box", // dom 选择器
+  view: "#mark-box", // dom 
 })
 mark.setDrawType('rect')
 mark.on('oncomplete',(e)=>{e.ok({})})
 ```
 
-### CDN 使用
+### Browser 
 ```html
  <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.6/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
-  view: "#mark-box", // dom 选择器
+  view: "#mark-box", // dom 
 })
 mark.setDrawType('rect')
 mark.on('oncomplete',(e)=>{e.ok({})})
 ```
 
-### ESM 使用
+### ESM 
 ```js 
 import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.6/dist/index.esm.js'
 
 const mark = new CanvasMarkBoard({
-  view: "#mark-box", // dom 选择器
+  view: "#mark-box", // dom 
 })
 mark.setDrawType('rect')
 mark.on('oncomplete',(e)=>{e.ok({ label:'person', color:'blue' })})
 ```
 
-## 自定义图形
-[自定义图形](https://zhuguibiao.github.io/canvas-mark-board/guide/register.html)
+## Custom Marks
+[custom Marks doc](https://zhuguibiao.github.io/canvas-mark-board/guide/register.html)
 
-## 配置项
-- `config` 配置项
+## Config
+- `config` 
 ```javascript
  new CanvasMarkBoard({
   lineWidth: 2,
-  drawColor: 'yellow', // 绘制中的颜色
-  fillColor: 'rgba(255,255,255,.5)'; // 选中填充颜色
-  showIndex: true; // 是否显示index
-  disableZoom: false; // 是否关闭缩放画板功能
-  disableMove: false; // 是否关闭移动画板功能
+  drawColor: 'yellow',
+  fillColor: 'rgba(255,255,255,.5)';
+  showIndex: true; 
+  disableZoom: false;
+  disableMove: false;
 });
 ```
 
-## 开发
+## Dev
 ```sh
 pnpm install 
 pnpm dev
