@@ -25,13 +25,11 @@ function App() {
   }, []);
 
   function createMark() {
-    if (mark.current) return;
     mark.current = new MarkBoard({
       view: "#mark-box", // ID名或者DOM对象
       lineWidth: 2,
       showIndex: false,
     });
-    console.log(mark.current)
     mark.current.register("sides_arrow", MarkSidesArrowObject);
     mark.current.register("polyline_arrow", MarkPolylineArrowObject);
     mark.current.register("triangle", MarkTriangleObject);
