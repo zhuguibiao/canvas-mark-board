@@ -10,6 +10,7 @@ import {
   MarkPolylineArrowObject,
   MarkTriangleObject,
   MarkDotObject,
+  MarkRotateRectObject,
 } from "custom-mark";
 
 const objectListJson = computed(() => {
@@ -52,6 +53,7 @@ function createMark() {
   mark.value.register("polyline_arrow", MarkPolylineArrowObject);
   mark.value.register("triangle", MarkTriangleObject);
   mark.value.register("dot", MarkDotObject);
+  mark.value.register("rotateRect", MarkRotateRectObject);
 
   mark.value.setBackground(img).then(() => {
     mark.value?.setDrawType("rect");

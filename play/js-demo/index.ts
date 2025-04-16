@@ -7,6 +7,7 @@ import {
   MarkPolylineArrowObject,
   MarkTriangleObject,
   MarkDotObject,
+  MarkRotateRectObject,
 } from "custom-mark";
 window.onload = onload;
 
@@ -98,6 +99,7 @@ function onload() {
     mark.register("polyline_arrow", MarkPolylineArrowObject);
     mark.register("triangle", MarkTriangleObject);
     mark.register("dot", MarkDotObject);
+    mark.register("rotateRect", MarkRotateRectObject);
 
     mark?.setBackground(Img).then(() => {
       mark.setDrawType(mark.currentDrawingType || "rect");

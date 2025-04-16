@@ -274,10 +274,133 @@ class MarkTriangleObject extends MoveMarkObject {
     return this.vertexList;
   }
 }
+/** 自定义旋转rect*/
+class MarkRotateRectObject extends MoveMarkObject {
+  rotation: any;
+  constructor(box: CanvasMarkBoard) {
+    super(box);
+    this.type = "rotateRect" as any;
+    this.minPointCount = 2;
+    this.rotation = 0;
+  }
+  setCursor() {}
+  setMoveEdit(): void {
+    if (this.acctivePointIndex == 4) {
+      const dx = this.lastMousePoint.x - this.centerPointer.x;
+      const dy = this.lastMousePoint.y - this.centerPointer.y;
+      // 计算旋转角度
+      this.rotation = ((Math.atan2(dy, dx) * 180) / Math.PI + 90) % 360;
+      return;
+    } else {
+      // 拖动角点
+      const rad = (-this.rotation * Math.PI) / 180;
+      const cos = Math.cos(rad);
+      const sin = Math.sin(rad);
+      const cx = this.centerPointer.x;
+      const cy = this.centerPointer.y;
+
+      // 转换为未旋转的坐标系
+      const relX = this.lastMousePoint.x - cx;
+      const relY = this.lastMousePoint.y - cy;
+
+      // 应用反向旋转
+      const newX = cx + (relX * cos - relY * sin);
+      const newY = cy + (relX * sin + relY * cos);
+      switch (this.acctivePointIndex) {
+        case 0: // 左上
+          this.pointList[0].x = newX;
+          this.pointList[0].y = newY;
+          break;
+        case 1: // 右上
+          this.pointList[0].x = newX;
+          this.pointList[1].y = newY;
+          break;
+        case 2: // 右下
+          this.pointList[1].x = newX;
+          this.pointList[1].y = newY;
+          break;
+        case 3: // 左下
+          this.pointList[1].x = newX;
+          this.pointList[0].y = newY;
+          break;
+      }
+    }
+  }
+  getTransformedPoints() {
+    const rad = (this.rotation * Math.PI) / 180;
+    const cos = Math.cos(rad);
+    const sin = Math.sin(rad);
+    const center = this.centerPointer;
+    return [
+      { x: this.pointList[0].x, y: this.pointList[0].y }, // 左上
+      { x: this.pointList[0].x, y: this.pointList[1].y }, // 左下
+      { x: this.pointList[1].x, y: this.pointList[1].y }, // 右下
+      { x: this.pointList[1].x, y: this.pointList[0].y }, // 右上
+      {
+        x: (this.pointList[0].x + this.pointList[1].x) / 2,
+        y: this.pointList[0].y,
+      }, // 旋转点
+    ].map((point) => {
+      const relX = point.x - center.x;
+      const relY = point.y - center.y;
+      return {
+        x: center.x + (relX * cos - relY * sin),
+        y: center.y + (relX * sin + relY * cos),
+      };
+    });
+  }
+
+  /** 获取path  */
+  get pathData() {
+    let path = ``;
+    if (this.vertexList.length) {
+      this.vertexList.forEach((point, index) => {
+        // 绘制线段
+        if (index === 0) {
+          path += `M${point.x},${point.y}`;
+        } else {
+          path += `L${point.x},${point.y}`;
+        }
+      });
+      path += `Z `;
+    }
+    return path;
+  }
+  /**
+   * 获取中心点
+   */
+  get centerPointer() {
+    if (this.pointList.length === 2) {
+      return {
+        x: (this.pointList[0].x + this.pointList[1].x) / 2,
+        y: (this.pointList[0].y + this.pointList[1].y) / 2,
+      };
+    }
+  }
+  /**
+   * 获取矩形顶点
+   */
+  get vertexList(): IPointData[] {
+    if (this.pointList.length === 2) {
+      return this.getTransformedPoints();
+    } else {
+      return [];
+    }
+  }
+  /**
+   * 获取结果点
+   */
+  get resultPoints() {
+    let res = this.getTransformedPoints();
+    res.pop();
+    return res;
+  }
+}
 
 export {
   MarkDotObject,
   MarkSidesArrowObject,
   MarkPolylineArrowObject,
   MarkTriangleObject,
+  MarkRotateRectObject,
 };

@@ -5,6 +5,7 @@ import {
   MarkSidesArrowObject,
   MarkPolylineArrowObject,
   MarkTriangleObject,
+  MarkRotateRectObject,
   MarkDotObject,
 } from "custom-mark";
 import img from "../../assets/image.jpg";
@@ -30,10 +31,12 @@ function App() {
       lineWidth: 2,
       showIndex: false,
     });
+    console.log(mark.current)
     mark.current.register("sides_arrow", MarkSidesArrowObject);
     mark.current.register("polyline_arrow", MarkPolylineArrowObject);
     mark.current.register("triangle", MarkTriangleObject);
     mark.current.register("dot", MarkDotObject);
+    mark.current.register("rotateRect", MarkRotateRectObject);
 
     mark.current.on("ondraw", (e) => {
       mark.current!.currentDrawingType = e.type;
