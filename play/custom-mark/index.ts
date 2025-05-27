@@ -375,6 +375,8 @@ class MarkRotateRectObject extends MoveMarkObject {
         x: (this.pointList[0].x + this.pointList[1].x) / 2,
         y: (this.pointList[0].y + this.pointList[1].y) / 2,
       };
+    } else {
+      return {};
     }
   }
   /**
@@ -387,13 +389,21 @@ class MarkRotateRectObject extends MoveMarkObject {
       return [];
     }
   }
-  /**
-   * 获取结果点
-   */
-  get resultPoints() {
-    let res = this.getTransformedPoints();
-    res.pop();
-    return res;
+  /** 获取index点 */
+  get indexPoint() {
+    return this.vertexList[0];
+  }
+
+  /** 导入 */
+  static import(box: CanvasMarkBoard, data: any) {
+    let obj = new this(box);
+    obj.rotation = data.rotation || 0;
+    obj.label = data.label;
+    obj.color = data.color || obj.color;
+    obj.pointList = data.pointList;
+    obj.status = "done";
+    obj.render();
+    return obj;
   }
 }
 
