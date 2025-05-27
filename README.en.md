@@ -48,7 +48,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### Browser 
 ```html
- <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.6/dist/index.umd.js"></srcipt>  
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.7/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
@@ -60,7 +60,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### ESM 
 ```js 
-import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.6/dist/index.esm.js'
+import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.7/dist/index.esm.js'
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 
