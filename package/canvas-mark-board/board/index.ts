@@ -421,6 +421,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
           color: obj.color,
           select: obj.id === this.selectObject?.id,
           pointList: obj.resultPoints || obj.pointList,
+          rotation: obj.rotation,
         };
       });
   }

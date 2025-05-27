@@ -57,6 +57,8 @@ class MarkObject implements MarkObject {
   lastMousePoint?: IPointData = { x: 0, y: 0 };
   /** 激活点位 */
   acctivePointIndex: number = -1;
+  /**旋转信息 */
+  rotation?: number = undefined;
 
   /**
    * 设置选中状态
