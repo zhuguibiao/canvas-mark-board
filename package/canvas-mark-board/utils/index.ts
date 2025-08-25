@@ -1,4 +1,4 @@
-import type { IPointData } from "../types";
+import type { IPointData, IMatrixData } from "../types";
 export { MatrixHelper } from "./MatrixHelper";
 
 /**
@@ -126,4 +126,35 @@ export function getUUID(): string {
     var v = c === "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
+}
+
+/**
+ * 适配DPR
+ */
+export function applyDPR(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  t: IMatrixData
+): number {
+  const dpr = window.devicePixelRatio || 1;
+
+  // 以当前显示尺寸为准（CSS 像素）
+  const rect = canvas.getBoundingClientRect();
+  const cssW = Math.round(rect.width);
+  const cssH = Math.round(rect.height);
+
+  const needResize =
+    canvas.width !== Math.round(cssW * dpr) ||
+    canvas.height !== Math.round(cssH * dpr);
+
+  if (needResize) {
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+  }
+  // 重置，然后 应用 DPR，再应用业务矩阵 t
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(dpr, dpr);
+  ctx.transform(t.a, t.b, t.c, t.d, t.e, t.f);
+
+  return dpr;
 }

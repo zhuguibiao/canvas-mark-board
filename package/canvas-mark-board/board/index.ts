@@ -163,8 +163,9 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
   }
   /** transfrom board */
   transfrom() {
-    this.ctx.setTransform(this.t);
-    this.regionCtx.setTransform(this.t);
+    MarkBoardUtils.applyDPR(this.ctx, this.canvas, this.t);
+    MarkBoardUtils.applyDPR(this.regionCtx, this.regionCanvas, this.t);
+
     if (this.img) this.imgTrans();
     this.selectObject?.render();
     this.render();
@@ -197,8 +198,8 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     this.img.style.transformOrigin! = `${this.t.e}px ${this.t.f}px`;
     this.img.style.transform! = `scale(${this.t.a}) translate(${this.t.e}px,${this.t.f}px)`;
   }
-  /** todo: 
-   * 1. 优化全部渲染 
+  /** todo:
+   * 1. 优化全部渲染
    * 2. 优化字体和devicePixelRatio显示
    **/
   render() {
@@ -213,10 +214,11 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     this.ctx.lineWidth = this.config.lineWidth / this.t.a;
     this.markObjectList.map((item) => {
       if (item.status !== "draw" && this.config.showLabel) {
+        this.ctx.fillStyle = item.color!;
         this.ctx.fillText(
           item.label + "",
           item.indexPoint.x,
-          item.indexPoint.y - 3 / this.t.a
+          item.indexPoint.y - 4 / this.t.a
         );
       }
       this.ctx.strokeStyle = item.color!;
@@ -513,6 +515,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
       this.setMoveEditStatus(false);
     }
   }
+ 
   destroy() {
     window.removeEventListener("keydown", this.windowKeydown);
     window.removeEventListener("keyup", this.windowKeyup);
