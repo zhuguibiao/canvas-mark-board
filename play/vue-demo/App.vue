@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, onUnmounted } from "vue";
 import CanvasMarkBoard from "canvas-mark-board";
 import jsonData from "../../assets/data.json";
 import img from "../../assets/image.jpg";
@@ -28,8 +28,19 @@ var labelInput = ref<string>("person");
 var colorInput = ref<string>("#ff0000");
 var objectList = ref<any[]>([]);
 
+function onResize() {
+  if (mark.value) {
+    mark.value.setLayout(mark.value.img);
+  }
+}
 onMounted(() => {
   createMark();
+  window.addEventListener("resize", onResize);
+});
+
+// 在组件卸载时移除
+onUnmounted(() => {
+  window.removeEventListener("resize", onResize);
 });
 
 var jsonValue = ref<string>("");
@@ -163,9 +174,12 @@ function selectObj(id: string) {
           :key="index"
           :style="{
             background: mark?.selectObject?.id == item.id ? '#ccc' : '#fff',
+            display: 'flex',
+            alignItems: 'center',
           }"
         >
           <input
+            style="width: 80px"
             :defaultValue="item.label"
             @input="
               mark?.setObject(item.id, {
@@ -204,9 +218,13 @@ h3 {
   display: flex;
   height: calc(80vh - 100px);
   width: 100%;
+  flex-wrap: nowrap;
 }
 .object-list {
-  width: 150px;
+  width: 180px;
+}
+.object-list button {
+  white-space: nowrap;
 }
 textarea {
   width: 100%;

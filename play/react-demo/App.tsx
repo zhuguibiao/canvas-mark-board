@@ -19,8 +19,15 @@ function App() {
 
   useEffect(() => {
     const mark = createMark();
+    function onResize() {
+      if (mark) {
+        mark.setLayout(mark.img);
+      }
+    }
+    window.addEventListener("resize", onResize);
     return () => {
-      return mark?.destroy();
+      window.removeEventListener("resize", onResize);
+      mark?.destroy();
     };
   }, []);
 
@@ -181,6 +188,9 @@ function App() {
                 }}
               >
                 <input
+                  style={{
+                    width: 90,
+                  }}
                   title="label 标签名"
                   defaultValue={item.label}
                   onChange={(e) => {

@@ -14,7 +14,7 @@ hero:
       link: /guide/
     - theme: alt
       text: Demo
-      link: https://zhuguibiao.github.io/canvas-mark-board/js-demo/
+      link: https://zhuguibiao.github.io/canvas-mark-board/react-demo/
 features:
   - title: 💡 简单
     details: 一款简单且独立的图像手动标注库，小却实用，你可以他用来扩展成视频标注、音频标注

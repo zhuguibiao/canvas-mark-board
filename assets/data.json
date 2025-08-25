@@ -3,7 +3,7 @@
     "id": "f9e1cf23-8903-4f40-8ff9-724363190272",
     "label": "person",
     "type": "polygon",
-    "color": "gray",
+    "color": "#747474",
     "pointList": [
       {
         "x": 257.7016248153619,
@@ -43,7 +43,7 @@
     "id": "f414b029-1311-43f8-b2e5-fa0508ce5740",
     "label": "women",
     "type": "rect",
-    "color": "blue",
+    "color": "#1411DF",
     "pointList": [
       {
         "x": 653.8020679468241,
@@ -59,7 +59,7 @@
     "id": "b420899a-1488-4885-97a2-c9c4131a08e2",
     "label": "home",
     "type": "circle",
-    "color": "pink",
+    "color": "#F7DEDE",
     "pointList": [
       {
         "x": 80.92171344165445,
