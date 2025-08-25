@@ -18,9 +18,9 @@ English | [简体中文](./README.md)
 
 note：Currently a beta version, later api and architecture may change, pay attention to the update
 
-[js-demo](https://zhuguibiao.github.io/canvas-mark-board/js-demo/)
-[vue-demo](https://zhuguibiao.github.io/canvas-mark-board/vue-demo/)
 [react-demo](https://zhuguibiao.github.io/canvas-mark-board/react-demo/)
+[vue-demo](https://zhuguibiao.github.io/canvas-mark-board/vue-demo/)
+[js-demo](https://zhuguibiao.github.io/canvas-mark-board/js-demo/)
 
 ## Doc
 [Doc Link](https://zhuguibiao.github.io/canvas-mark-board/)
@@ -48,7 +48,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### Browser 
 ```html
- <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.8/dist/index.umd.js"></srcipt>  
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.9/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
@@ -60,7 +60,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### ESM 
 ```js 
-import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.8/dist/index.esm.js'
+import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.9/dist/index.esm.js'
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 

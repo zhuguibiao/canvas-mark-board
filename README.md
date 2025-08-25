@@ -18,11 +18,11 @@
 
 注：目前是beta版本，后期api和架构可能会change，关注update
 
-[原生js在线演示](https://zhuguibiao.github.io/canvas-mark-board/js-demo/)
+[react在线演示](https://zhuguibiao.github.io/canvas-mark-board/react-demo/)
 
 [vue在线演示](https://zhuguibiao.github.io/canvas-mark-board/vue-demo/)
 
-[react在线演示](https://zhuguibiao.github.io/canvas-mark-board/react-demo/)
+[原生js在线演示](https://zhuguibiao.github.io/canvas-mark-board/js-demo/)
 
 ## 文档
 [文档](https://zhuguibiao.github.io/canvas-mark-board/)
@@ -50,7 +50,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### CDN 使用
 ```html
- <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.8/dist/index.umd.js"></srcipt>  
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.9/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
@@ -62,7 +62,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### ESM 使用
 ```js 
-import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.8/dist/index.esm.js'
+import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.9/dist/index.esm.js'
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
