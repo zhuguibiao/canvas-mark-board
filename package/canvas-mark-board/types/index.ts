@@ -4,7 +4,9 @@ export interface IMarkBoardConfig {
   view: string;
   drawColor?: string;
   fillColor?: string;
-  showIndex?: boolean;
+  /** 基本用不到，删除 */
+  // showIndex?: boolean;
+  showLabel?: boolean;
   disableZoom?: boolean;
   disableMove?: boolean;
 }
@@ -21,8 +23,8 @@ export type IMarkBoardDrawType =
   | "";
 
 export interface IObjectLabelData {
-  label: string;
-  color: string;
+  label?: string;
+  color?: string;
 }
 
 export interface IObjectCompleteHandle {

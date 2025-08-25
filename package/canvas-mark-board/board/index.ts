@@ -19,6 +19,7 @@ import type {
   IEventListener,
   IMarkObjectJSON,
   IFunction,
+  IObjectLabelData,
 } from "../types";
 
 @useModule(Eventer)
@@ -37,7 +38,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     drawColor: "yellow",
     lineWidth: 2,
     fillColor: "rgba(255, 255, 255, 0.3)",
-    showIndex: true,
+    showLabel: false,
   };
   t: IMatrixData = { a: 1, b: 0, c: 0, d: 1, e: 0, f: 0 };
   initLayout = { zoom: 1, offsetx: 0, offsety: 0, width: 0, height: 0 };
@@ -196,20 +197,24 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     this.img.style.transformOrigin! = `${this.t.e}px ${this.t.f}px`;
     this.img.style.transform! = `scale(${this.t.a}) translate(${this.t.e}px,${this.t.f}px)`;
   }
-  /** TODO:优化全部渲染 */
+  /** todo: 
+   * 1. 优化全部渲染 
+   * 2. 优化字体和devicePixelRatio显示
+   **/
   render() {
     for (var i = 0; i < this.renderGroup.length; i++) {
       this.renderGroup[i] = null;
     }
     this.renderGroup = [];
     this.clearCanvas(this.ctx);
-    this.ctx.font = `bold ${~~(16 / this.t.a)}px serif`;
+    this.ctx.font = `bold ${~~(
+      14 / this.t.a
+    )}px  'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif`;
     this.ctx.lineWidth = this.config.lineWidth / this.t.a;
-    this.markObjectList.map((item, index) => {
-      if (item.status !== "draw" && this.config.showIndex) {
-        /**render 序号 */
+    this.markObjectList.map((item) => {
+      if (item.status !== "draw" && this.config.showLabel) {
         this.ctx.fillText(
-          index + "",
+          item.label + "",
           item.indexPoint.x,
           item.indexPoint.y - 3 / this.t.a
         );
@@ -456,6 +461,11 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
     });
     this.render();
     this.emit("onchange");
+  }
+  /** 设置单个对象标签 */
+  setObject(id: IMarkObjectId, data: IObjectLabelData) {
+    let obj = this.markObjectList.find((item) => item.id === id);
+    if (obj) obj.setData(data);
   }
   /** 选中对象ID */
   public selectObjectById(id: IMarkObjectId) {

@@ -1,5 +1,10 @@
 import CanvasMarkBoard from "../index";
-import type { IPointData, IMarkObjectJSON, IMarkBoardDrawType } from "../types";
+import type {
+  IPointData,
+  IMarkObjectJSON,
+  IMarkBoardDrawType,
+  IObjectLabelData,
+} from "../types";
 interface MarkObject {
   /** 销毁 */
   destory(): void;
@@ -75,6 +80,19 @@ class MarkObject implements MarkObject {
     this.status = select ? "edit" : "done";
     this.box.selectObject = this;
     this.render();
+    this.box.emit("onchange");
+  }
+  
+  setData(data: IObjectLabelData) {
+    const { label, color } = data;
+    if (label) {
+      this.label = label;
+    }
+    if (color) {
+      this.color = color;
+    }
+    this.render();
+    this.box.render();
     this.box.emit("onchange");
   }
 }
