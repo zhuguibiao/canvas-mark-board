@@ -35,7 +35,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### CDN 使用
 ```html
- <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.9/dist/index.umd.js"></srcipt>  
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.10/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
@@ -47,7 +47,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### ESM 使用
 ```js 
-import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.9/dist/index.esm.js'
+import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.10/dist/index.esm.js'
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
