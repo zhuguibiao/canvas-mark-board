@@ -46,7 +46,7 @@ function createMark() {
   if (mark.value) return;
   mark.value = new CanvasMarkBoard({
     view: "#mark-box",
-     showIndex: false,
+    showLabel: true,
   });
 
   mark.value.register("sides_arrow", MarkSidesArrowObject);
@@ -165,7 +165,24 @@ function selectObj(id: string) {
             background: mark?.selectObject?.id == item.id ? '#ccc' : '#fff',
           }"
         >
-          <span>{{ item.label }}</span>
+          <input
+            :defaultValue="item.label"
+            @input="
+              mark?.setObject(item.id, {
+                label: $event.target.value,
+              })
+            "
+          />
+          <input
+            type="color"
+            title="color 颜色"
+            :defaultValue="item.color"
+            @input="
+              mark?.setObject(item.id, {
+                color: $event.target.value,
+              })
+            "
+          />
           <button @click="mark.deleteObject(item.id)">删除</button>
         </div>
       </div>
@@ -174,7 +191,7 @@ function selectObj(id: string) {
   </div>
 </template>
 
-<style scoped >
+<style scoped>
 .page {
   width: 80%;
   margin: 0 auto;

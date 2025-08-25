@@ -48,7 +48,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### Browser 
 ```html
- <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.7/dist/index.umd.js"></srcipt>  
+ <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.8/dist/index.umd.js"></srcipt>  
 ```
 ```js 
 const mark = new CanvasMarkBoard({
@@ -60,7 +60,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
 
 ### ESM 
 ```js 
-import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.7/dist/index.esm.js'
+import { CanvasMarkBoard } from 'https://www.unpkg.com/canvas-mark-board@0.0.1-beta.8/dist/index.esm.js'
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 
@@ -79,7 +79,7 @@ mark.on('oncomplete',(e)=>{e.ok({ label:'person', color:'blue' })})
   lineWidth: 2,
   drawColor: 'yellow',
   fillColor: 'rgba(255,255,255,.5)';
-  showIndex: true; 
+  showLabel: false 
   disableZoom: false;
   disableMove: false;
 });
@@ -90,3 +90,8 @@ mark.on('oncomplete',(e)=>{e.ok({ label:'person', color:'blue' })})
 pnpm install 
 pnpm dev
 ```
+
+
+## ChangeLog
+
+[ChangeLog](./changelog.md)

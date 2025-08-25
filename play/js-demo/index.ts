@@ -92,7 +92,7 @@ function onload() {
     if (mark) return;
     mark = new CanvasMarkBoard({
       view: "#mark-box", // ID名或者DOM对象
-      showIndex: false,
+      showLabel: false,
     });
 
     mark.register("sides_arrow", MarkSidesArrowObject);

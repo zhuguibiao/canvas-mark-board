@@ -28,7 +28,7 @@ function App() {
     mark.current = new MarkBoard({
       view: "#mark-box", // ID名或者DOM对象
       lineWidth: 2,
-      showIndex: false,
+      showLabel: true,
     });
     mark.current.register("sides_arrow", MarkSidesArrowObject);
     mark.current.register("polyline_arrow", MarkPolylineArrowObject);
@@ -169,8 +169,9 @@ function App() {
             return (
               <div
                 style={{
-                  marginLeft: 10,
+                  marginLeft: 5,
                   display: "flex",
+                  alignItems: "center",
                   background:
                     mark.current?.selectObject?.id == item.id ? "#ccc" : "#fff",
                 }}
@@ -179,7 +180,25 @@ function App() {
                   mark.current?.selectObjectById(item.id);
                 }}
               >
-                <div>{item.label}</div>
+                <input
+                  title="label 标签名"
+                  defaultValue={item.label}
+                  onChange={(e) => {
+                    mark.current?.setObject(item.id, {
+                      label: e.target.value,
+                    });
+                  }}
+                />
+                <input
+                  title="color 颜色"
+                  onChange={(e) => {
+                    mark.current?.setObject(item.id, {
+                      color: e.target.value,
+                    });
+                  }}
+                  type="color"
+                  defaultValue={item.color}
+                />
                 <button
                   onClick={() => {
                     mark.current?.deleteObject(item.id);

@@ -30,7 +30,7 @@ $ yarn add canvas-mark-board
 
 ```js  [js]
 /** link js*/
-// <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.7/dist/index.umd.js"></srcipt>  
+// <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.8/dist/index.umd.js"></srcipt>  
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
@@ -71,7 +71,7 @@ mark.on('oncomplete',(e)=>{e.ok({})})
   lineWidth: 2,
   drawColor: 'yellow', // 绘制中的颜色
   fillColor: 'rgba(255,255,255,.5)'; // 选中填充颜色
-  showIndex: true; // 是否显示index
+  showLabel: false // 是否显示label
   disableZoom: false; // 是否关闭缩放画板功能
   disableMove: false; // 是否关闭移动画板功能
 });
