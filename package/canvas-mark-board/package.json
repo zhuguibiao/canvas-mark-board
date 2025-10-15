@@ -1,6 +1,6 @@
 {
   "name": "canvas-mark-board",
-  "version": "0.0.1-beta.10",
+  "version": "0.0.1-beta.11",
   "type": "module",
   "main": "./dist/index.esm.js",
   "unpkg": "./dist/index.umd.js",

@@ -30,7 +30,7 @@ $ yarn add canvas-mark-board
 
 ```js  [js]
 /** link js*/
-// <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.10/dist/index.umd.js"></srcipt>  
+// <srcipt src="https://www.unpkg.com/canvas-mark-board@0.0.1-beta.11/dist/index.umd.js"></srcipt>  
 
 const mark = new CanvasMarkBoard({
   view: "#mark-box", // dom 选择器
