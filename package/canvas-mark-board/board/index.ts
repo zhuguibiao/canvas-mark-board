@@ -472,7 +472,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
   /** 选中对象ID */
   public selectObjectById(id: IMarkObjectId) {
     let obj = this.markObjectList.find((item) => item.id === id);
-    if (obj) obj.setSelect(true);
+    if (obj) obj.setSelect();
   }
   /** 删除对象 */
   public deleteObject(id: IMarkObjectId) {

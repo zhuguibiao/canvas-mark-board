@@ -184,8 +184,8 @@ export default class ClickMarkObject extends MarkObject {
     }
     // 设置标签
     this.completeing = false;
-    this.label = labelData?.label;
-    this.color = labelData?.color;
+    this.label = labelData?.label || this?.label;
+    this.color = labelData?.color || this?.color;
 
     this.status = "done";
     this.render();
@@ -294,6 +294,7 @@ export default class ClickMarkObject extends MarkObject {
   static import(box: CanvasMarkBoard, data: IMarkObjectJSON) {
     let obj = new this(box);
     obj.label = data.label;
+    obj.data = data?.data;
     obj.color = data.color || obj.color;
     obj.pointList = data.pointList;
     obj.status = "done";

@@ -33,6 +33,7 @@ export interface IObjectCompleteHandle {
 }
 
 export interface IMarkObjectJSON {
+  data?: unknown;
   index: number;
   label: string;
   color?: string;

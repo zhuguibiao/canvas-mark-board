@@ -42,6 +42,7 @@ class MarkObject implements MarkObject {
   // 对象类型
   type!: IMarkBoardDrawType;
   // 标签
+  data: any = {};
   label: string = "";
   color: string = "#ff0000";
   // 序号
@@ -69,15 +70,17 @@ class MarkObject implements MarkObject {
    * 设置选中状态
    * @param select
    */
-  setSelect(select?: boolean) {
+  setSelect() {
     // 清空已有选中
     if (this.box.selectObject) {
       this.box.selectObject.status = "done";
       this.box.selectObject.render();
       this.box.selectObject = undefined;
     }
-    // 选中的最高层
-    this.status = select ? "edit" : "done";
+        // 选中的最高层
+    if (this.status !== 'draw') {
+      this.status = 'edit';
+    }
     this.box.selectObject = this;
     this.render();
     this.box.emit("onchange");
