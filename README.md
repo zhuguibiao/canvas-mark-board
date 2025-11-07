@@ -3,16 +3,11 @@
 
 [English](./README.en.md)  | 简体中文
 
+  <p>
+    <a href="https://www.npmjs.com/package/canvas-mark-board"><img src="https://badgen.net/npm/v/canvas-mark-board" alt="Version" /></a>
+    <a href="https://www.npmjs.com/package/canvas-mark-board"><img src="https://badgen.net/npm/dm/canvas-mark-board" alt="Downloads" /></a>
+  </p>
 </div>
-
-<p align="center">
-  <a href="https://www.npmjs.com/package/canvas-mark-board">
-    <img src="https://img.shields.io/npm/v/canvas-mark-board?style=flat-square&color=00a8f0" alt="npm version" />
-  </a>
-  <a href="https://www.npmjs.com/package/canvas-mark-board">
-    <img src="https://img.shields.io/npm/dm/canvas-mark-board?style=flat-square&color=00a8f0" alt="downloads" />
-  </a>
-</p>
 
 **canvas-mark-board** 基于原生canvas封装的图像标注工具，在 vue / react / 原生js 应用中都可以实现标注功能。提供了一系列事件和方法，用于管理标注对象、绘制标注形状、导入标注数据等操作。
 

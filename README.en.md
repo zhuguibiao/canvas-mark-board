@@ -3,16 +3,11 @@
 
 English | [简体中文](./README.md) 
 
+  <p>
+    <a href="https://www.npmjs.com/package/canvas-mark-board"><img src="https://badgen.net/npm/v/canvas-mark-board" alt="Version" /></a>
+    <a href="https://www.npmjs.com/package/canvas-mark-board"><img src="https://badgen.net/npm/dm/canvas-mark-board" alt="Downloads" /></a>
+  </p>
 </div>
-
-<p align="center">
-  <a href="https://www.npmjs.com/package/canvas-mark-board">
-    <img src="https://img.shields.io/npm/v/canvas-mark-board?style=flat-square&color=00a8f0" alt="npm version" />
-  </a>
-  <a href="https://www.npmjs.com/package/canvas-mark-board">
-    <img src="https://img.shields.io/npm/dm/canvas-mark-board?style=flat-square&color=00a8f0" alt="downloads" />
-  </a>
-</p>
 
 **canvas-mark-board** image annotation tool based on  canvas package, in vue / react / native js applications can realize the annotation function. Provides a series of events and methods for managing labeled objects, drawing labeled shapes, importing labeled data and other operations.
 
