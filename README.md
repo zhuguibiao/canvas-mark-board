@@ -4,7 +4,7 @@
 [English](./README.en.md)  | 简体中文
 
   <p>
-    <a href="https://www.npmjs.com/package/canvas-mark-board"><img src="https://badgen.net/npm/v/canvas-mark-board" alt="Version" /></a>
+    <a href="https://www.npmjs.com/package/canvas-mark-board"><img src="https://img.shields.io/npm/v/canvas-mark-board.svg?style=flat" alt="Version" /></a>
     <a href="https://www.npmjs.com/package/canvas-mark-board"><img src="https://badgen.net/npm/dm/canvas-mark-board" alt="Downloads" /></a>
   </p>
 </div>
