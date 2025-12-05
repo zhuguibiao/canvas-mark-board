@@ -120,13 +120,14 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
 
     return canvas;
   }
-  /** 清除canvas */
+  /** 
+   * 清除canvas
+   * todo 优化clear canvas，暂时
+   */
   clearCanvas(ctx: CanvasRenderingContext2D) {
     ctx.save();
-    ctx.globalCompositeOperation = "copy";
-    ctx.beginPath();
-    ctx.lineTo(0, 0);
-    ctx.stroke();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.restore();
   }
   /**
@@ -515,7 +516,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
       this.setMoveEditStatus(false);
     }
   }
- 
+
   destroy() {
     window.removeEventListener("keydown", this.windowKeydown);
     window.removeEventListener("keyup", this.windowKeyup);
