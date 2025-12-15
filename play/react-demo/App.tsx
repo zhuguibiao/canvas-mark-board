@@ -20,9 +20,7 @@ function App() {
   useEffect(() => {
     const mark = createMark();
     function onResize() {
-      if (mark) {
-        mark.setLayout(mark.img);
-      }
+      mark.handleResize()
     }
     window.addEventListener("resize", onResize);
     return () => {

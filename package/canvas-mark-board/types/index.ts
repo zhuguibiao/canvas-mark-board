@@ -85,6 +85,7 @@ export interface ICanvasMarkBoard extends IEventer {
     event: "boxMousedown" | "boxMousemove" | "boxMouseup",
     point: IPointData
   ) => void;
+  handleResize: () => void;
   transfrom: () => void;
   setLayout: (img: HTMLImageElement) => void;
   setBackground: (path: string) => Promise<unknown>;

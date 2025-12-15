@@ -30,7 +30,7 @@ var objectList = ref<any[]>([]);
 
 function onResize() {
   if (mark.value) {
-    mark.value.setLayout(mark.value.img);
+    mark.value.handleResize();
   }
 }
 onMounted(() => {
