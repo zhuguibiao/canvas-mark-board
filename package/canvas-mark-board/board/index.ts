@@ -472,6 +472,14 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
   }
   /** 设置标注对象 */
   public setObjectData(list: IMarkObjectJSON[]) {
+    /** 添加的时候把最后一个绘制中的去掉 */
+    if (this.currentDrawingType) {
+      let obj = this.markObjectList[this.markObjectList.length - 1];
+      if (obj && obj.status === "draw") {
+        obj?.destory();
+        this.markObjectList.pop();
+      }
+    }
     list.forEach((item) => {
       let obj;
       if (item.type) {
@@ -484,7 +492,7 @@ export default class CanvasMarkBoard implements ICanvasMarkBoard {
       obj && this.markObjectList.push(obj);
     });
     this.render();
-    this.emit("onchange");
+    this.addObjectData();
   }
   /** 设置单个对象标签 */
   setObject(id: IMarkObjectId, data: IObjectLabelData) {
